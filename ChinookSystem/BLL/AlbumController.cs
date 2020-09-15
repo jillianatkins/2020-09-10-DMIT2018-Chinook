@@ -9,7 +9,6 @@ using System.ComponentModel;
 using ChinookSystem.DAL;
 using ChinookSystem.VIEWMODELS;
 
-
 namespace ChinookSystem.BLL
 {
     [DataObject]
