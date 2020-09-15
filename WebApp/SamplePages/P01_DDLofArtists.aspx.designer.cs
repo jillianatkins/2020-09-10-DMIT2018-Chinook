@@ -24,22 +24,49 @@ namespace WebApp.SamplePages
         protected global::System.Web.UI.WebControls.Label Label1;
 
         /// <summary>
-        /// DDLofArtists control.
+        /// DDLofArtists1 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList DDLofArtists;
+        protected global::System.Web.UI.WebControls.DropDownList DDLofArtists1;
 
         /// <summary>
-        /// DisplaySelectedInfo control.
+        /// DisplaySelectedInfo1 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton DisplaySelectedInfo;
+        protected global::System.Web.UI.WebControls.LinkButton DisplaySelectedInfo1;
+
+        /// <summary>
+        /// Label2 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label Label2;
+
+        /// <summary>
+        /// DDLofArtists2 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList DDLofArtists2;
+
+        /// <summary>
+        /// DisplaySelectedInfo2 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton DisplaySelectedInfo2;
 
         /// <summary>
         /// MessageLabel control.
