@@ -34,7 +34,7 @@ namespace ChinookSystem.BLL
                                   ArtistId = x.ArtistId,
                                   ArtistName = x.Name
                               };
-                return results.ToList();
+                return results.OrderBy(x => x.ArtistName).ToList();
             }
         }
     }
