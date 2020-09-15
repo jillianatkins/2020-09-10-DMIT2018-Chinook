@@ -1,7 +1,7 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="P01_DDLofArtists.aspx.cs" Inherits="WebApp.SamplePages.P01_DDLofArtists" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
     <div class="row">
-
+        <%--TODO: 02 Add a DDL--%>
     </div>
     <br /><br />
 
@@ -45,4 +45,5 @@
         SelectMethod="Artist_List"
         TypeName="ChinookSystem.BLL.ArtistController">
     </asp:ObjectDataSource>
+    <%--TODO: 01 Add a ODS--%>
 </asp:Content>
