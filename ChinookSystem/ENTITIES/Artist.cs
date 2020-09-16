@@ -36,9 +36,9 @@ namespace ChinookSystem.ENTITIES
 
         //navigational properties
         //part of a relationship to table Albums
-        //it is the parent part of the relationship
-        //this means that an artist has MANY albums *****
-        //public virtual ICollection<ENTITY02_Album> Albums { get; set; }
+        //The Artist is the parent part of the relationship
+        //this means that ONE artist has MANY albums *****
+        public virtual ICollection<Album> Albums { get; set; }
     }
 
 }
