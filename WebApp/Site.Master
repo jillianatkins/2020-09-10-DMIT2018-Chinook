@@ -75,12 +75,17 @@
                                 <a class="dropdown-item"
                                         href="~/SamplePages/P02_CGVofAlbums.aspx"
                                         style="color:black" runat="server">
-                                   P02 Custom Grid View of Albums
+                                   P02 Drop-Down-List of Albums
                                 </a>
                                 <a class="dropdown-item"
-                                        href="~/SamplePages/P03_CGVofTracks.aspx"
+                                        href="~/SamplePages/P03_CGVofAlbums.aspx"
                                         style="color:black" runat="server">
-                                   P03 Custom Grid View of Tracks
+                                   P03 Custom Grid View of Albums
+                                </a>
+                                <a class="dropdown-item"
+                                        href="~/SamplePages/P04_CGVofTracks.aspx"
+                                        style="color:black" runat="server">
+                                   P04 Custom Grid View of Tracks
                                 </a>
                             </div>
                          </li>
