@@ -13,5 +13,11 @@ namespace WebApp.SamplePages
         {
 
         }
+        protected void GridView1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            GridViewRow agvrow = GridView1.Rows[GridView1.SelectedIndex];
+            string colValue = agvrow.Cells[1].Text.Trim();
+            MessageLabel.Text = colValue;
+        }
     }
 }

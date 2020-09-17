@@ -73,7 +73,7 @@
                                    P01 Drop-Down-List of Artists
                                 </a>
                                 <a class="dropdown-item"
-                                        href="~/SamplePages/P02_CGVofAlbums.aspx"
+                                        href="~/SamplePages/P02_DDLofAlbums.aspx"
                                         style="color:black" runat="server">
                                    P02 Drop-Down-List of Albums
                                 </a>
