@@ -11,7 +11,7 @@ namespace WebApp.SamplePages
 {
 
 
-    public partial class P02_CGVofAlbums
+    public partial class P03_CGVofAlbums
     {
 
         /// <summary>

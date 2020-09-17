@@ -23,6 +23,8 @@ namespace ChinookSystem.ENTITIES
         [StringLength(200, ErrorMessage = "Name is limited to 200 characters")]
         public string Name { get; set; }
         public int? AlbumId { get; set; }
+
+        [Required(ErrorMessage = "Media Type is required")]
         public int MediaTypeId { get; set; }
         public int? GenreId { get; set; }
 
@@ -32,8 +34,12 @@ namespace ChinookSystem.ENTITIES
             get { return _Composer; }
             set { _Composer = string.IsNullOrEmpty(value) ? null : value; }
         }
+
+        [Required(ErrorMessage = "Milliseconds is required")]
         public int Milliseconds { get; set; }
         public int? Bytes { get; set; }
+
+        [Required(ErrorMessage = "UnitPrice is required")]
         public decimal UnitPrice { get; set; }
 
         //navigational properties
