@@ -1,6 +1,7 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="P03_CGVofAlbums.aspx.cs" Inherits="WebApp.SamplePages.P03_CGVofAlbums" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
     <h1>Custom Grid View of Albums</h1>
+    <br /><br />
     <%--CssClass="table table-striped" GridLines="Horizontal" BorderStyle="None"--%>
     <div class="row">
         <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="False" DataSourceID="ObjectDataSource1" AllowPaging="True" PageSize="5" BorderStyle="None" CssClass="table table-striped" GridLines="Horizontal" AllowSorting="False" PagerSettings-FirstPageText="&lt;&lt;" PagerSettings-Mode="NumericFirstLast" OnSelectedIndexChanged="GridView1_SelectedIndexChanged">

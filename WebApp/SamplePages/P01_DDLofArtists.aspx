@@ -1,10 +1,11 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="P01_DDLofArtists.aspx.cs" Inherits="WebApp.SamplePages.P01_DDLofArtists" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
+    <h1>Drop-Down-List of Artists</h1>
+    <br /><br />
     <div class="row">
         <%--TODO: 02 Add a DDL--%>
     </div>
     <br /><br />
-
     <div class="row">
         <asp:Label ID="Label1" runat="server" Text="Select Artist"></asp:Label>&nbsp;&nbsp;
         <asp:DropDownList ID="DDLofArtists1" runat="server"

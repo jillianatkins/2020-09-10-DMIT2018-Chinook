@@ -1,6 +1,7 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="P04_CGVofTracks.aspx.cs" Inherits="WebApp.SamplePages.P04_CGVofTracks" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
-    <h1>P04 Custom GridView of All the Tracks</h1>
+    <h1>Custom GridView of Tracks</h1>
+    <br /><br />
     <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="False" DataSourceID="ObjectDataSource1" PagerSettings-Position="Bottom" PagerStyle-BorderStyle="Inset" AllowPaging="True" PagerSettings-Mode="NumericFirstLast" CssClass="table table-striped" BorderStyle="None" GridLines="Horizontal" PageSize="5" OnSelectedIndexChanged="GridView1_SelectedIndexChanged">
         <Columns>
             <asp:CommandField ShowSelectButton="True"></asp:CommandField>
