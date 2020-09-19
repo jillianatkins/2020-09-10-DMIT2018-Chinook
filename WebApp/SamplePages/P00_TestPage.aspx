@@ -2,4 +2,3 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
     <h1>Hey World</h1>
 </asp:Content>
-</asp:Content>
