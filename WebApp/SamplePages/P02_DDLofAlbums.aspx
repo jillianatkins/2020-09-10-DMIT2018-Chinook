@@ -3,7 +3,11 @@
     <h1>Drop-Down-List of Albums</h1>
     <br /><br />
     <asp:Label ID="Label1" runat="server" Text="Pick an Album"></asp:Label>
-    <asp:DropDownList ID="DropDownList1" runat="server" DataSourceID="Album_ODS" DataTextField="AlbumTitle" DataValueField="AlbumId"></asp:DropDownList>
+    <asp:DropDownList ID="DropDownList1" runat="server" DataSourceID="Album_ODS" DataTextField="AlbumTitle" DataValueField="AlbumId" AppendDataBoundItems="True">
+        <asp:ListItem Value="0">Select...</asp:ListItem>
+    </asp:DropDownList>
     <asp:Button ID="Button1" runat="server" Text="Button" OnClick="Button1_Click" />
+    <br /><br />
+    <asp:Label ID="MessageLabel" runat="server"></asp:Label>
     <asp:ObjectDataSource ID="Album_ODS" runat="server" OldValuesParameterFormatString="original_{0}" SelectMethod="Albums_List" TypeName="ChinookSystem.BLL.AlbumController"></asp:ObjectDataSource>
 </asp:Content>
