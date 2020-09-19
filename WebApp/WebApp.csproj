@@ -185,11 +185,11 @@
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Account\Web.config" />
+    <Content Include="SamplePages\P00_TestPage.aspx" />
     <Content Include="SamplePages\P01_DDLofArtists.aspx" />
     <Content Include="SamplePages\P02_DDLofAlbums.aspx" />
     <Content Include="SamplePages\P03_CGVofAlbums.aspx" />
     <Content Include="SamplePages\P04_CGVofTracks.aspx" />
-    <Content Include="SamplePages\TestPage1.aspx" />
     <Content Include="Scripts\bootstrap.bundle.js" />
     <Content Include="Scripts\bootstrap.bundle.min.js" />
     <Content Include="Scripts\bootstrap.js" />
@@ -463,6 +463,13 @@
     </Compile>
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SamplePages\P00_TestPage.aspx.cs">
+      <DependentUpon>P00_TestPage.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="SamplePages\P00_TestPage.aspx.designer.cs">
+      <DependentUpon>P00_TestPage.aspx</DependentUpon>
+    </Compile>
     <Compile Include="SamplePages\P01_DDLofArtists.aspx.cs">
       <DependentUpon>P01_DDLofArtists.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -490,13 +497,6 @@
     </Compile>
     <Compile Include="SamplePages\P04_CGVofTracks.aspx.designer.cs">
       <DependentUpon>P04_CGVofTracks.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="SamplePages\TestPage1.aspx.cs">
-      <DependentUpon>TestPage1.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="SamplePages\TestPage1.aspx.designer.cs">
-      <DependentUpon>TestPage1.aspx</DependentUpon>
     </Compile>
     <Compile Include="Site.Master.cs">
       <DependentUpon>Site.Master</DependentUpon>
