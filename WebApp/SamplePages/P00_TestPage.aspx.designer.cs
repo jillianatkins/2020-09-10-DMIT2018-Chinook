@@ -11,7 +11,7 @@ namespace WebApp.SamplePages
 {
 
 
-    public partial class TestPage1
+    public partial class P00_TestPage
     {
     }
 }
