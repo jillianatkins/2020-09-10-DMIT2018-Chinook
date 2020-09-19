@@ -15,6 +15,19 @@ namespace WebApp.SamplePages
         }
         protected void Button1_Click(object sender, EventArgs e)
         {
+            if (DropDownList1.SelectedValue == "0")
+            {
+                MessageLabel.Text = "Please Select an Album";
+            }
+            else
+            {
+                var selectedindex = DropDownList1.SelectedIndex;
+                var selectedvalue = DropDownList1.SelectedValue;
+                var selecteditem = DropDownList1.SelectedItem;
+                MessageLabel.Text = $"SelectedIndex:{selectedindex} " +
+                                    $" SelectedValue:{selectedvalue} " +
+                                    $" SelectedItem:{selecteditem}";
+            }
 
         }
     }
