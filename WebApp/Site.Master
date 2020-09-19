@@ -63,9 +63,9 @@
                                 Samples</a>
                             <div class="dropdown-menu" aria-labelledby="navbarSubMenu">
                                 <a class="dropdown-item"
-                                        href="~/SamplePages/TestPage1.aspx"
+                                        href="~/SamplePages/P00_TestPage.aspx"
                                         style="color:black" runat="server">
-                                   TestPage1-Hello World
+                                   TestPage-Hello World
                                 </a>
                                 <a class="dropdown-item"
                                         href="~/SamplePages/P01_DDLofArtists.aspx"
