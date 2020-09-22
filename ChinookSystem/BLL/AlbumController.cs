@@ -14,6 +14,7 @@ namespace ChinookSystem.BLL
     [DataObject]
     public class AlbumController
     {
+        #region Queries
         [DataObjectMethod(DataObjectMethodType.Select, false)]
         public List<AlbumViewModel> Albums_List()
         {
@@ -50,5 +51,6 @@ namespace ChinookSystem.BLL
                 return results.ToList();
             }
         }
-    }   
+        #endregion
+    }
 }
