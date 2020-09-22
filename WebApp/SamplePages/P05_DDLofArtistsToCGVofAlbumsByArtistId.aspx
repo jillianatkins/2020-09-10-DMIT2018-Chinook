@@ -11,9 +11,10 @@
         <asp:Label ID="Label1" runat="server" Text="Select an Artist"></asp:Label>&nbsp;
         <asp:ObjectDataSource ID="ObjectDataSource1" runat="server" OldValuesParameterFormatString="original_{0}" SelectMethod="Artist_List" TypeName="ChinookSystem.BLL.ArtistController">
         </asp:ObjectDataSource>
-        <asp:DropDownList ID="DropDownList1" runat="server" DataSourceID="ObjectDataSource1" DataTextField="ArtistName" DataValueField="ArtistId">
+        <asp:DropDownList ID="DropDownList1" runat="server" DataSourceID="ObjectDataSource1" DataTextField="ArtistName" DataValueField="ArtistId" AppendDataBoundItems="True">
+            <asp:ListItem Value="0">Select...</asp:ListItem>
         </asp:DropDownList>&nbsp;
-        <asp:Button ID="Button1" runat="server" Text="Button" />
+        <asp:Button ID="Button1" runat="server" Text="Get Albums of this Artist" />
     </div>
     <br />
     <div class="row">
