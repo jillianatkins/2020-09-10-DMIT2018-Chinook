@@ -38,8 +38,6 @@ namespace ChinookSystem.BLL
                 return results.OrderBy(x => x.ArtistName).ToList();
             }
         }
-        #endregion
-        #region Commands
-        #endregion
+        #endregion  
     }
 }
