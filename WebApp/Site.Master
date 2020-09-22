@@ -87,6 +87,11 @@
                                         style="color:black" runat="server">
                                    P04 Custom Grid View of Tracks
                                 </a>
+                                <a class="dropdown-item"
+                                        href="~/SamplePages/P05_DDLofArtistsToCGVofAlbumsByArtistId.aspx"
+                                        style="color:black" runat="server">
+                                   P05 DDLofArtists to CGVofAlbums by ArtistId
+                                </a>
                             </div>
                          </li>
                          <li class="nav-item">
