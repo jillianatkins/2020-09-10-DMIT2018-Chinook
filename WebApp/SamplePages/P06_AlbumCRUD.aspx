@@ -1,12 +1,18 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="P06_AlbumCRUD.aspx.cs" Inherits="WebApp.SamplePages.P06_AlbumCRUD" %>
+
+<%@ Register Src="~/UserControls/MessageUserControl.ascx" TagPrefix="uc1" TagName="MessageUserControl" %>
+
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
     <div class="row">
         <h2>Album CRUD</h2>
     </div>
     <br />
     <div class="row">
-        <asp:ObjectDataSource ID="ObjectDataSource1" runat="server" DataObjectTypeName="ChinookSystem.VIEWMODELS.AlbumViewModel" DeleteMethod="Albums_Delete" InsertMethod="Albums_Add" OldValuesParameterFormatString="original_{0}" SelectMethod="Albums_List" TypeName="ChinookSystem.BLL.AlbumController" UpdateMethod="Albums_Update"></asp:ObjectDataSource>
-        <asp:ListView ID="ListView1" runat="server" DataSourceID="ObjectDataSource1" InsertItemPosition="LastItem">
+        <%-- REMEMBER to add the OnDeleted, OnInserted, OnSelected, and OnUpdated event attributes --%>
+        <%-- to access the code behind methods to catch exceptions thrown from the EntityFramework --%>
+        <asp:ObjectDataSource ID="ObjectDataSource1" runat="server" DataObjectTypeName="ChinookSystem.VIEWMODELS.AlbumViewModel" DeleteMethod="Albums_Delete" InsertMethod="Albums_Insert" OldValuesParameterFormatString="original_{0}" SelectMethod="Albums_List" TypeName="ChinookSystem.BLL.AlbumController" UpdateMethod="Albums_Update" OnDeleted="DeleteCheckForException" OnInserted="InsertCheckForException" OnSelected="SelectCheckForException" OnUpdated="UpdateCheckForException"></asp:ObjectDataSource>
+        <%-- REMEMBER to add the DataKeyNames="AlbumId" parameter to your ListView so that Delete will work --%>
+        <asp:ListView ID="ListView1" runat="server" DataSourceID="ObjectDataSource1" InsertItemPosition="LastItem" DataKeyNames="AlbumId">
             <AlternatingItemTemplate>
                 <tr style="background-color: #FFF8DC;">
                     <td>
@@ -137,4 +143,7 @@
         </asp:ListView>
     </div>
     <br />
+    <div class="row">
+        <uc1:MessageUserControl runat="server" ID="MessageUserControl" />
+    </div>
 </asp:Content>

@@ -53,9 +53,14 @@ namespace ChinookSystem.BLL
             }
         }
         #endregion
-        #region Add,Update,Delete
+
+        #region Insert,Update,Delete
+
+        //REMEMBER to add the DataKeyNames="AlbumId" 
+        //attribute to your ListView so that Delete will work
+
         [DataObjectMethod(DataObjectMethodType.Insert, false)]
-        public void Albums_Add(AlbumViewModel item)
+        public void Albums_Insert(AlbumViewModel item)
         {
             using (var context = new ChinookSystemContext())
             {
