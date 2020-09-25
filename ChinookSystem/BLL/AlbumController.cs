@@ -120,21 +120,16 @@ namespace ChinookSystem.BLL
         #region Support Methods
         private void CheckReleaseYear(AlbumViewModel item)
         {
-            int releaseyear;
             if (string.IsNullOrEmpty(item.AlbumTitle))
                 throw new Exception("Album Title is required.");
             else if (item.AlbumTitle.Length == 160)
                 throw new Exception("Album Title is over 160 chars.");
             else if (item.ArtistId == 0)
                 throw new Exception("ArtistId is required.");
-            else if (!int.TryParse(item.ArtistId.ToString(), out releaseyear))
-                throw new Exception("ArtistId must be numeric.");
-            else if (string.IsNullOrEmpty(item.AlbumReleaseYear.ToString()))
+            else if (item.AlbumReleaseYear == 0)
                 throw new Exception("Release year is required");
-            else if (!int.TryParse(item.AlbumReleaseYear.ToString(), out releaseyear))
-                throw new Exception("Release year must be numeric (yyyy).");
-            else if (releaseyear < 1950 || releaseyear > DateTime.Today.Year)
-                throw new Exception(string.Format("{0} invalid. Must be between 1950 and today.", releaseyear)); 
+            else if (item.AlbumReleaseYear < 1950 || item.AlbumReleaseYear > DateTime.Today.Year)
+                throw new Exception(string.Format("{0} invalid. Must be between 1950 and today.", item.AlbumReleaseYear)); 
         }
         #endregion
     }
