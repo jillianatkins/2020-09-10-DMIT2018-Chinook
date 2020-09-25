@@ -24,13 +24,22 @@ namespace WebApp.SamplePages
         protected global::System.Web.UI.WebControls.GridView GridView1;
 
         /// <summary>
-        /// ObjectDataSource1 control.
+        /// ArtistODS control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ObjectDataSource ObjectDataSource1;
+        protected global::System.Web.UI.WebControls.ObjectDataSource ArtistODS;
+
+        /// <summary>
+        /// AlbumODS control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.ObjectDataSource AlbumODS;
 
         /// <summary>
         /// MessageLabel control.
