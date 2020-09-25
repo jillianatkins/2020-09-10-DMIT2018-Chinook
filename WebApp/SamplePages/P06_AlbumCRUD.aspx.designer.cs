@@ -15,13 +15,13 @@ namespace WebApp.SamplePages
     {
 
         /// <summary>
-        /// ObjectDataSource1 control.
+        /// ListViewODS control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ObjectDataSource ObjectDataSource1;
+        protected global::System.Web.UI.WebControls.ObjectDataSource ListViewODS;
 
         /// <summary>
         /// ListView1 control.
@@ -40,5 +40,14 @@ namespace WebApp.SamplePages
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::FreeCode.WebApp.UserControls.MessageUserControl MessageUserControl;
+
+        /// <summary>
+        /// ArtistODS control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.ObjectDataSource ArtistODS;
     }
 }
