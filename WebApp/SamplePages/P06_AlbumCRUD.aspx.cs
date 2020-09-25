@@ -14,6 +14,11 @@ namespace WebApp.SamplePages
 
         }
         #region Error Handling
+
+        protected void CheckForException(object sender, ObjectDataSourceStatusEventArgs e)
+        {
+            MessageUserControl.HandleDataBoundException(e);
+        }
         protected void SelectCheckForException(object sender, ObjectDataSourceStatusEventArgs e)
         {
             MessageUserControl.HandleDataBoundException(e);
