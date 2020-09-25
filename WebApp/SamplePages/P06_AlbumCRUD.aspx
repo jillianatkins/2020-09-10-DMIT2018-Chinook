@@ -42,7 +42,8 @@
                             ID="AlbumIdLabel" />
                     </td>
                     <td>
-                        <asp:Label Text='<%# Eval("AlbumTitle") %>' runat="server" ID="AlbumTitleLabel" /></td>
+                        <asp:Label Text='<%# Eval("AlbumTitle") %>' runat="server" ID="AlbumTitleLabel" />
+                    </td>
                     <td>
                         <asp:DropDownList ID="DropDownList1" 
                             runat="server" 
