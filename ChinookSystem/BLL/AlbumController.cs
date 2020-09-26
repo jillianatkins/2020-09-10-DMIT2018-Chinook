@@ -55,7 +55,7 @@ namespace ChinookSystem.BLL
         }
         #endregion
 
-        #region Insert,Update,Delete
+        #region Insert, Update, Delete Commands
 
         //REMEMBER to add the DataKeyNames="AlbumId" 
         //attribute to your ListView so that Delete will work
@@ -117,7 +117,7 @@ namespace ChinookSystem.BLL
         }
         #endregion
 
-        #region Support Methods
+        #region BLL Data Validation
         private void DataValidation(AlbumViewModel item)
         {
             if (string.IsNullOrEmpty(item.AlbumTitle))
