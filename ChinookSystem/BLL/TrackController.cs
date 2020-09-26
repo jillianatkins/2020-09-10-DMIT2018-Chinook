@@ -14,6 +14,7 @@ namespace ChinookSystem.BLL
     [DataObject]
     public class TrackController
     {
+        #region Queries
         [DataObjectMethod(DataObjectMethodType.Select, false)]
         public List<TrackViewModel> Track_List()
         {
@@ -31,5 +32,6 @@ namespace ChinookSystem.BLL
                 return results.ToList();
             }
         }
+        #endregion
     }
 }
