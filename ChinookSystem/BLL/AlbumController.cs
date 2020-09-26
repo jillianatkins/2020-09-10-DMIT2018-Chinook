@@ -63,7 +63,7 @@ namespace ChinookSystem.BLL
         [DataObjectMethod(DataObjectMethodType.Insert, false)]
         public void Albums_Insert(AlbumViewModel item)
         {
-            DataValidation(item);
+            //DataValidation(item);
             using (var context = new ChinookSystemContext())
             {
                 Album info = new Album()
@@ -81,7 +81,7 @@ namespace ChinookSystem.BLL
         [DataObjectMethod(DataObjectMethodType.Update, false)]
         public void Albums_Update(AlbumViewModel item)
         {
-            DataValidation(item);
+            //DataValidation(item);
             using (var context = new ChinookSystemContext())
             {
                 Album info = new Album()
