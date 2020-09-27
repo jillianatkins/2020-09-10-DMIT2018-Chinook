@@ -19,10 +19,10 @@
             SelectMethod="Albums_List" 
             TypeName="ChinookSystem.BLL.AlbumController" 
             UpdateMethod="Albums_Update" 
-            OnDeleted="CheckForException" 
-            OnInserted="CheckForException" 
-            OnSelected="CheckForException" 
-            OnUpdated="CheckForException">
+            OnDeleted="DeleteCheckForException" 
+            OnInserted="InsertCheckForException" 
+            OnSelected="SelectCheckForException" 
+            OnUpdated="UpdateCheckForException">
         </asp:ObjectDataSource>
         <%-- REMEMBER to add the DataKeyNames="AlbumId" parameter to ListView so Delete will work --%>
         <asp:ListView ID="ListView1" 
@@ -227,6 +227,12 @@
     </div>
     <asp:ObjectDataSource ID="ArtistODS" runat="server" OldValuesParameterFormatString="original_{0}" SelectMethod="Artist_List" TypeName="ChinookSystem.BLL.ArtistController"></asp:ObjectDataSource>
 </asp:Content>
-<%--OnDeleted="DeleteCheckForException" OnInserted="InsertCheckForException" OnSelected="SelectCheckForException" OnUpdated="UpdateCheckForException"--%>
+<%--OnDeleted="DeleteCheckForException" 
+    OnInserted="InsertCheckForException" 
+    OnSelected="SelectCheckForException" 
+    OnUpdated="UpdateCheckForException"--%>
 
-<%--OnDeleted="CheckForException" OnInserted="CheckForException" OnSelected="CheckForException" OnUpdated="CheckForException"--%>
+<%--OnDeleted="CheckForException" 
+    OnInserted="CheckForException" 
+    OnSelected="CheckForException" 
+    OnUpdated="CheckForException"--%>

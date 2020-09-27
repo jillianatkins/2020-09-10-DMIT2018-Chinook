@@ -63,7 +63,7 @@ namespace ChinookSystem.BLL
         [DataObjectMethod(DataObjectMethodType.Insert, false)]
         public void Albums_Insert(AlbumViewModel item)
         {
-            //DataValidation(item);
+            DataValidation(item);
             using (var context = new ChinookSystemContext())
             {
                 Album info = new Album()
@@ -81,7 +81,7 @@ namespace ChinookSystem.BLL
         [DataObjectMethod(DataObjectMethodType.Update, false)]
         public void Albums_Update(AlbumViewModel item)
         {
-            //DataValidation(item);
+            DataValidation(item);
             using (var context = new ChinookSystemContext())
             {
                 Album info = new Album()
@@ -121,11 +121,11 @@ namespace ChinookSystem.BLL
         private void DataValidation(AlbumViewModel item)
         {
             if (string.IsNullOrEmpty(item.AlbumTitle))
-                throw new Exception("Album Title is required.");
+                throw new Exception("(BLL) Album Title is required.");
             else if (item.AlbumTitle.Length == 160)
-                throw new Exception("Album Title is over 160 chars.");
+                throw new Exception("(BLL) Album Title is over 160 chars.");
             else if (item.AlbumReleaseYear < 1950 || item.AlbumReleaseYear > DateTime.Today.Year)
-                throw new Exception(string.Format("Year {0} invalid. Make between 1950 and {1}.",
+                throw new Exception(string.Format("(BLL) Year {0} is invalid. Make between 1950 and {1}.",
                     item.AlbumReleaseYear, DateTime.Today.Year)); 
         }
         #endregion
