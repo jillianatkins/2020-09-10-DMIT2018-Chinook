@@ -19,9 +19,7 @@ namespace WebApp.SamplePages
         {
             MessageUserControl.HandleDataBoundException(e);
         }
-        #endregion
-
-        #region Code not used at the moment
+        
         protected void SelectCheckForException(object sender, ObjectDataSourceStatusEventArgs e)
         {
             MessageUserControl.HandleDataBoundException(e);
