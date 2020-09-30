@@ -10,7 +10,7 @@
         <asp:Label ID="Label1" runat="server" Text="Select Artist"></asp:Label>&nbsp;&nbsp;
         <asp:DropDownList ID="DDLofArtists1" runat="server"
             DataSourceID="ODS_DDLofArtists"
-            DataTextField="ArtistName"
+            DataTextField="NameAndId"
             DataValueField="ArtistId"
             Width="350px">
         </asp:DropDownList>&nbsp;&nbsp;

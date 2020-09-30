@@ -12,10 +12,19 @@
                 <%--Convert asp:BoundField to asp:Template in the wizard,
                 add a dropdownlist inside itemtemplate, attach ODS to DDL, and include 
                 selectedvalue=--%>
+                
+                <asp:TemplateField HeaderText="ArtistId" SortExpression="ArtistId">
+                    <EditItemTemplate>
+                        <asp:TextBox runat="server" Text='<%# Bind("ArtistId") %>' ID="TextBox1"></asp:TextBox>
+                    </EditItemTemplate>
+                    <ItemTemplate>
+                        <asp:Label runat="server" Text='<%# Bind("ArtistId") %>' ID="Label1"></asp:Label>
+                    </ItemTemplate>
+                </asp:TemplateField>
 
-                <asp:BoundField DataField="ArtistId" HeaderText="ArtistId" SortExpression="ArtistId" ></asp:BoundField>
                 <asp:BoundField DataField="AlbumReleaseYear" HeaderText="AlbumReleaseYear" SortExpression="AlbumReleaseYear"></asp:BoundField>
                 <asp:BoundField DataField="AlbumReleaseLabel" HeaderText="AlbumReleaseLabel" SortExpression="AlbumReleaseLabel"></asp:BoundField>
+                <asp:BoundField DataField="ReleaseLabelAndYear" HeaderText="Label (Year)" ReadOnly="True" SortExpression="ReleaseLabelAndYear"></asp:BoundField>
             </Columns>
         </asp:GridView>
         <asp:ObjectDataSource ID="ArtistODS" runat="server" OldValuesParameterFormatString="original_{0}" SelectMethod="Artist_List" TypeName="ChinookSystem.BLL.ArtistController"></asp:ObjectDataSource>
