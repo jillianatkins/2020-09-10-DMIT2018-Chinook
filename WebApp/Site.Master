@@ -97,6 +97,11 @@
                                         style="color:black" runat="server">
                                    P06 Album CRUD
                                 </a>
+                                <a class="dropdown-item"
+                                        href="~/SamplePages/OLTP1.aspx"
+                                        style="color:black" runat="server">
+                                   OLTP Demo
+                                </a>
                             </div>
                          </li>
                          <li class="nav-item">
