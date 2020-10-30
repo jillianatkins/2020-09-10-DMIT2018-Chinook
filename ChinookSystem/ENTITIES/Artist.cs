@@ -1,44 +1,25 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-// Additional Namespaces
-using System.ComponentModel.DataAnnotations.Schema;
-using System.ComponentModel.DataAnnotations;
-
 namespace ChinookSystem.ENTITIES
 {
-    [Table("Artists")]
+    using System;
+    using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
+    using System.ComponentModel.DataAnnotations.Schema;
+    using System.Data.Entity.Spatial;
 
-    //Using internal to add another layer of security to our code.
-    //This internal will restrict access to this class to within
-    //the SystemDB project.
-    //Because of this we now need VIEWMODELS.
-    internal class Artist
+    public partial class Artist
     {
-        // anotations:
-        // [Key] is defualt primary identity field on database
-        // [Key, DatabaseGenerated(DatabaseGeneratedOption.xxxx)]
-        //    where xxx is Computed, Identity, or None
-        // [Key, Column(Order=n)]
-        //     where n is  1, 2, 3, etc depending on how many parts to your
-        //       compound primary key
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Artist()
+        {
+            Albums = new HashSet<Album>();
+        }
 
-        [Key]
         public int ArtistId { get; set; }
 
-        //validation anotation
-        [Required(ErrorMessage = "(Entity) Artist Name is required")]
-        [StringLength(120, ErrorMessage = "(Entity) Artist name is limited to 120 characters")]
+        [StringLength(120)]
         public string Name { get; set; }
 
-        //navigational properties
-        //part of a relationship to table Albums
-        //The Artist is the parent part of the relationship
-        //this means that ONE artist has MANY albums *****
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Album> Albums { get; set; }
     }
-
 }

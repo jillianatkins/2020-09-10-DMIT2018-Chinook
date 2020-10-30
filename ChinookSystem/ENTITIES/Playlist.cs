@@ -6,30 +6,24 @@ namespace ChinookSystem.ENTITIES
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
 
-    public partial class Album
+    public partial class Playlist
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Album()
+        public Playlist()
         {
-            Tracks = new HashSet<Track>();
+            PlaylistTracks = new HashSet<PlaylistTrack>();
         }
 
-        public int AlbumId { get; set; }
+        public int PlaylistId { get; set; }
 
         [Required]
-        [StringLength(160)]
-        public string Title { get; set; }
+        [StringLength(120)]
+        public string Name { get; set; }
 
-        public int ArtistId { get; set; }
-
-        public int ReleaseYear { get; set; }
-
-        [StringLength(50)]
-        public string ReleaseLabel { get; set; }
-
-        public virtual Artist Artist { get; set; }
+        [StringLength(120)]
+        public string UserName { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Track> Tracks { get; set; }
+        public virtual ICollection<PlaylistTrack> PlaylistTracks { get; set; }
     }
 }
