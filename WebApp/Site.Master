@@ -98,9 +98,19 @@
                                    P06 Album CRUD
                                 </a>
                                 <a class="dropdown-item"
-                                        href="~/SamplePages/OLTP1.aspx"
+                                        href="~/SamplePages/P07_Repeater_Control.aspx"
+                                        style="color:black" runat="server">
+                                   Repeater Control Demo
+                                </a>
+                                <a class="dropdown-item"
+                                        href="~/SamplePages/P08_OLTP_Demo.aspx"
                                         style="color:black" runat="server">
                                    OLTP Demo
+                                </a>
+                                <a class="dropdown-item"
+                                        href="~/SamplePages/OLTP1.aspx"
+                                        style="color:black" runat="server">
+                                   OLTP Demo using CSS Grid instead of Bootstrap
                                 </a>
                             </div>
                          </li>
