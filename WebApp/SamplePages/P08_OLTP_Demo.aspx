@@ -3,10 +3,9 @@
 <%@ Register Src="~/UserControls/MessageUserControl.ascx" TagPrefix="uc1" TagName="MessageUserControl" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
-<div>
-    <h4>Manage Playlists (UI/UX TRX Sample)</h4>
-</div>
-    
+    <div>
+        <h5>Manage Playlists (UI/UX TRX Sample)</h5>
+    </div>
     <div class="row">
         <div class="offset-1">
             <uc1:MessageUserControl runat="server" ID="MessageUserControl" />
