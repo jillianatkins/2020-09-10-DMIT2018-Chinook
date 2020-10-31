@@ -4,7 +4,7 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
 <div>
-    <h1>Manage Playlists (UI/UX TRX Sample)</h1>
+    <h4>Manage Playlists (UI/UX TRX Sample)</h4>
 </div>
     
     <div class="row">
@@ -12,40 +12,40 @@
             <uc1:MessageUserControl runat="server" ID="MessageUserControl" />
         </div>
     </div>
-    <div class="row no-gutter">
+    <div class="row">
     <div class="col-sm-2">
-        <asp:Label ID="Label1" runat="server" Text="Artist" ></asp:Label><br />
+        <asp:Label ID="Label1" runat="server" Text="Artist" ></asp:Label>
         <asp:TextBox ID="ArtistName" runat="server" CssClass="form-control"
              placeholder="artist name"> 
-        </asp:TextBox><br />
+        </asp:TextBox>
         <asp:Button ID="ArtistFetch" runat="server" Text="Fetch" 
             OnCommand="Button_Command" CommandName="Artist"/>
-        <br /><br />
-         <asp:Label ID="Label2" runat="server" Text="Media"></asp:Label><br />
+        <br />
+         <asp:Label ID="Label2" runat="server" Text="Media"></asp:Label>
         <asp:DropDownList ID="MediaTypeDDL" runat="server"
              CssClass="form-control" DataSourceID="MediaTypeDDLODS" 
             DataTextField="DisplayText" 
             DataValueField="IDValueField">
-        </asp:DropDownList><br />
+        </asp:DropDownList>
         <asp:Button ID="MediaTypeFetch" runat="server" Text="Fetch" 
              OnCommand="Button_Command"    CommandName="MediaType"  />
-        <br /><br />
-         <asp:Label ID="Label3" runat="server" Text="Genre"></asp:Label><br />
+        <br />
+         <asp:Label ID="Label3" runat="server" Text="Genre"></asp:Label>
         <asp:DropDownList ID="GenreDDL" runat="server"
              CssClass="form-control" DataSourceID="GenreDDLODS" 
             DataTextField="DisplayText" 
             DataValueField="IDValueField">
-        </asp:DropDownList><br />
+        </asp:DropDownList>
         <asp:Button ID="GenreFetch" runat="server" Text="Fetch" 
             OnCommand="Button_Command" CommandName="Genre" />
-        <br /><br />
-         <asp:Label ID="Label4" runat="server" Text="Album"></asp:Label><br />
+        <br />
+         <asp:Label ID="Label4" runat="server" Text="Album"></asp:Label>
         <asp:TextBox ID="AlbumTitle" runat="server" ToolTip="Enter an partial album title"
              CssClass="form-control" placeholder="album title">
-        </asp:TextBox><br />
+        </asp:TextBox>
         <asp:Button ID="AlbumFetch" runat="server" Text="Fetch" 
             OnCommand="Button_Command" CommandName="Album" />
-        <br /><br />
+        <br />
     </div>
     <div class="col-sm-10">
         <asp:Panel ID="QueryPanel" runat="server" Visible="true">
@@ -62,8 +62,8 @@
                         <asp:LinkButton ID="AddtoPlaylist" runat="server"
                             CommandName="AddToMyPlayList" 
                             CommandArgument='<%# Item.TrackID %>'
-                            CssClass="btn btn-secondary">
-                            Add
+                            CssClass="btn">
+                            <i class="fa fa-plus" style="color:red;"></i>
                         </asp:LinkButton>
                     </td>
                     <td><asp:Label Text="<%# Item.TrackID %>"  runat="server"  ID="TrackIDLabel"/></td>
@@ -93,8 +93,8 @@
                        <asp:LinkButton ID="AddtoPlaylist" runat="server"
                            CommandName="AddToMyPlayList"
                            CommandArgument='<%# Item.TrackID %>'
-                           CssClass="btn" >
-                           Add
+                           CssClass="btn">
+                           <i class="fa fa-plus" style="color:red;"></i>
                         </asp:LinkButton>
                     </td>
                     <td><asp:Label Text="<%# Item.TrackID %>"  runat="server"  ID="TrackIDLabel"/></td>
@@ -153,24 +153,6 @@
         <asp:Button ID="PlayListFetch" runat="server" Text="Fetch" OnClick="PlayListFetch_Click" 
             />--%>
 
-        <%--enter 3 linkbuttons for move up, move down and delete--%>
-        <%--<asp:LinkButton ID="MoveUp" runat="server"
-                CssClass="btn" OnClick="MoveUp_Click"  >
-            <span aria-hidden="true" class="glyphicon glyphicon-chevron-up"></span>
-        </asp:LinkButton>&nbsp;&nbsp;
-        <asp:LinkButton ID="MoveDown" runat="server"
-                CssClass="btn" OnClick="MoveDown_Click" >
-            <span aria-hidden="true" class="glyphicon glyphicon-chevron-down"></span>
-        </asp:LinkButton>&nbsp;&nbsp;
-        <asp:LinkButton ID="DeleteTrack" runat="server"
-            CssClass="btn" OnClick="DeleteTrack_Click"
-            OnClientClick="return confirm('Are you sure you wish to remove the selected song(s)?')">
-            <span aria-hidden="true" class="glyphicon glyphicon-remove"
-                 style="color:red"></span>
-        </asp:LinkButton>
-        <br /><br />--%>
-
-
         <asp:GridView ID="MyPlayList" runat="server" AutoGenerateColumns="False"
              Caption="PlayList" GridLines="Horizontal" BorderStyle="None" 
             ItemType="ChinookSystem.VIEWMODELS.UserPlayListTrack" 
@@ -184,26 +166,19 @@
                             CommandArgument="<%# Container.DataItemIndex %>"
                             CssClass="btn" 
                             OnClientClick="return confirm('Are you sure you wish to remove the selected song(s)?')">
-                            <span aria-hidden="true" 
-                                class="glyphicon glyphicon-remove"
-                                style="color:red">
-                            </span>
+                            <i class="fa fa-times" style="color:red;"></i>&nbsp;
                         </asp:LinkButton>
                         <asp:LinkButton ID="MoveUp" runat="server"
                             CommandName="MoveUpOnMyPlayList"
                             CommandArgument='<%# Item.TrackID %>'
-                            CssClass="btn"   >
-                            <span aria-hidden="true" 
-                                class="glyphicon glyphicon-chevron-up">
-                            </span>
+                            CssClass="btn">
+                            <i class="fa fa-chevron-up" style="color:blue;"></i>&nbsp;
                         </asp:LinkButton>
                         <asp:LinkButton ID="MoveDown" runat="server"
                             CommandName="MoveDownOnMyPlayList"
                             CommandArgument='<%# Item.TrackID %>'
                             CssClass="btn"  >
-                            <span aria-hidden="true" 
-                                class="glyphicon glyphicon-chevron-down">
-                            </span>
+                            <i class="fa fa-chevron-down" style="color:blue;"></i>&nbsp;
         </asp:LinkButton>
                     </ItemTemplate> 
 
