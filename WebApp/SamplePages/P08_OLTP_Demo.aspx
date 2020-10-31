@@ -12,7 +12,7 @@
             <uc1:MessageUserControl runat="server" ID="MessageUserControl" />
         </div>
     </div>
-    <div class="row">
+    <div class="row no-gutter">
     <div class="col-sm-2">
         <asp:Label ID="Label1" runat="server" Text="Artist" ></asp:Label><br />
         <asp:TextBox ID="ArtistName" runat="server" CssClass="form-control"
