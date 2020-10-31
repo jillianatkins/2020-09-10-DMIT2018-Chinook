@@ -132,13 +132,13 @@ namespace WebApp.SamplePages
         protected global::System.Web.UI.WebControls.Button AlbumFetch;
 
         /// <summary>
-        /// Label5 control.
+        /// QueryPanel control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label5;
+        protected global::System.Web.UI.WebControls.Panel QueryPanel;
 
         /// <summary>
         /// TracksBy control.
@@ -168,67 +168,13 @@ namespace WebApp.SamplePages
         protected global::System.Web.UI.WebControls.ListView TracksSelectionList;
 
         /// <summary>
-        /// Label6 control.
+        /// MyPlayList control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label6;
-
-        /// <summary>
-        /// PlaylistName control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox PlaylistName;
-
-        /// <summary>
-        /// PlayListFetch control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button PlayListFetch;
-
-        /// <summary>
-        /// MoveUp control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton MoveUp;
-
-        /// <summary>
-        /// MoveDown control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton MoveDown;
-
-        /// <summary>
-        /// DeleteTrack control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton DeleteTrack;
-
-        /// <summary>
-        /// PlayList control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView PlayList;
+        protected global::System.Web.UI.WebControls.GridView MyPlayList;
 
         /// <summary>
         /// MediaTypeDDLODS control.
@@ -249,12 +195,12 @@ namespace WebApp.SamplePages
         protected global::System.Web.UI.WebControls.ObjectDataSource GenreDDLODS;
 
         /// <summary>
-        /// TrackSelectionListODS control.
+        /// TracksSelectionListODS control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ObjectDataSource TrackSelectionListODS;
+        protected global::System.Web.UI.WebControls.ObjectDataSource TracksSelectionListODS;
     }
 }
