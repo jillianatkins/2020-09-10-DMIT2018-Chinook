@@ -25,7 +25,7 @@ namespace ChinookSystem.BLL
                               orderby x.Name
                               select new SelectionList
                               {
-                                  ValueId = x.MediaTypeId,
+                                  IDValueField = x.MediaTypeId,
                                   DisplayText = x.Name
                               };
                 return results.ToList();

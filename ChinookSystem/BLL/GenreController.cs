@@ -25,7 +25,7 @@ namespace ChinookSystem.BLL
                               orderby x.Name
                               select new SelectionList
                               {
-                                  ValueId = x.GenreId,
+                                  IDValueField = x.GenreId,
                                   DisplayText = x.Name
                               };
                 return results.ToList();

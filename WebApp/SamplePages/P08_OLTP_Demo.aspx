@@ -53,7 +53,7 @@
             <asp:Label ID="SearchArg" runat="server" ></asp:Label>
         </asp:Panel>
         <asp:ListView ID="TracksSelectionList" runat="server"
-            ItemType="ChinookSystem.Data.POCOs.TrackList"
+            ItemType="ChinookSystem.VIEWMODELS.TrackList"
             OnItemCommand="TracksSelectionList_ItemCommand"
             DataSourceID="TracksSelectionListODS">
             <AlternatingItemTemplate>
@@ -173,7 +173,7 @@
 
         <asp:GridView ID="MyPlayList" runat="server" AutoGenerateColumns="False"
              Caption="PlayList" GridLines="Horizontal" BorderStyle="None" 
-            ItemType="ChinookSystem.Data.POCOs.UserPlaylistTrack" 
+            ItemType="ChinookSystem.VIEWMODELS.UserPlayListTrack" 
             DataKeyNames="TrackID"
             OnRowCommand="MyPlayList_RowCommand" >
             <Columns>
