@@ -58,7 +58,7 @@ namespace WebApp.SamplePages
         protected void MyPlayList_RowCommand(object sender, GridViewCommandEventArgs e)
         {
             int rowIndex = Convert.ToInt32(e.CommandArgument);
-            var playListItems = GetPlayListItemsFromGridView();
+            List<UserPlayListTrack> playListItems = GetPlayListItemsFromGridView();
             var playListItem = playListItems[rowIndex];
             if (e.CommandName == "DeleteFromMyPlayList")
             {
@@ -79,9 +79,6 @@ namespace WebApp.SamplePages
             {
                 MessageUserControl.ShowInfo("", "MESSAGE: MoveUpOnMyPlayList, index: " + 
                     rowIndex.ToString());
-
-                //Reference the GridView Row.
-                //GridViewRow row = MyPlayList.Rows[rowIndex];
                 if(rowIndex != 0)
                 {
                     playListItems.Remove(playListItem);
@@ -89,13 +86,19 @@ namespace WebApp.SamplePages
                     MyPlayList.DataSource = playListItems;
                     MyPlayList.DataBind();
                 }
-                e.Handled = true;
-                
+                e.Handled = true;  
             }
             else if (e.CommandName == "MoveDownOnMyPlayList")
             {
                 MessageUserControl.ShowInfo("", "MESSAGE: MoveDownOnMyPlayList, index: " +
                     rowIndex.ToString());
+                if (rowIndex != playListItems.Count-1)
+                {
+                    playListItems.Remove(playListItem);
+                    playListItems.Insert(rowIndex + 1, playListItem);
+                    MyPlayList.DataSource = playListItems;
+                    MyPlayList.DataBind();
+                }
             }
         }
 
@@ -133,7 +136,7 @@ namespace WebApp.SamplePages
             };
             return track;
         }
-        IList<UserPlayListTrack> GetPlayListItemsFromGridView()
+        List<UserPlayListTrack> GetPlayListItemsFromGridView()
         {
             var list = new List<UserPlayListTrack>();
             foreach (GridViewRow row in MyPlayList.Rows)
