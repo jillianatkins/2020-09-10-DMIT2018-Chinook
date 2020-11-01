@@ -19,6 +19,7 @@ namespace WebApp.SamplePages
         protected void Page_Load(object sender, EventArgs e)
         {
             TracksSelectionList.DataSource = null;
+            MessageUserControl.ShowInfo("");
         }
 
         protected void Button_Command(Object sender, System.Web.UI.WebControls.CommandEventArgs e)
@@ -28,7 +29,7 @@ namespace WebApp.SamplePages
             {
                 case ("Artist"):
                     if (string.IsNullOrEmpty(ArtistName.Text))
-                        MessageUserControl.ShowInfo("Entry Error", "Select an artist name or part of.");
+                        MessageUserControl.ShowInfo("", "ERROR: Select an artist name or part of.");
                     else
                         SearchArg.Text = ArtistName.Text;
                     break;
@@ -40,7 +41,7 @@ namespace WebApp.SamplePages
                     break;
                 case ("Album"):
                     if (string.IsNullOrEmpty(AlbumTitle.Text))
-                        MessageUserControl.ShowInfo("Entry Error", "Enter an album title or part of.");
+                        MessageUserControl.ShowInfo("", "ERROR: Enter an album title or part of.");
                     else
                         SearchArg.Text = AlbumTitle.Text;
                     break;
@@ -52,9 +53,9 @@ namespace WebApp.SamplePages
         {
             if (e.CommandName == "DeleteFromMyPlayList")
             {
-                MessageUserControl.ShowInfo("Message", "DeleteFromMyPlayList");
+                MessageUserControl.ShowInfo("", "MESSAGE: DeleteFromMyPlayList");
                 int rowIndex = Convert.ToInt32(e.CommandArgument);
-                MessageUserControl.ShowInfo("Message", rowIndex.ToString());
+                MessageUserControl.ShowInfo("", "MESSAGE: " + rowIndex.ToString());
 
                 //Reference the GridView Row.
                 GridViewRow row = MyPlayList.Rows[rowIndex];
@@ -71,11 +72,11 @@ namespace WebApp.SamplePages
             }
             else if (e.CommandName == "MoveUpOnMyPlayList")
             {
-                MessageUserControl.ShowInfo("Message", "MoveUpOnMyPlayList");
+                MessageUserControl.ShowInfo("", "MESSAGE: MoveUpOnMyPlayList");
             }
             else if (e.CommandName == "MoveDownOnMyPlayList")
             {
-                MessageUserControl.ShowInfo("Message", "MoveDownOnMyPlayList");
+                MessageUserControl.ShowInfo("", "MESSAGE: MoveDownOnMyPlayList");
             }
         }
 
@@ -141,7 +142,7 @@ namespace WebApp.SamplePages
         {
             if (e.Exception == null)
             {
-                MessageUserControl.ShowInfo("Success", "Album has been added.");
+                MessageUserControl.ShowInfo("", "SUCCESS: Album has been added.");
             }
             else
             {
@@ -152,7 +153,7 @@ namespace WebApp.SamplePages
         {
             if (e.Exception == null)
             {
-                MessageUserControl.ShowInfo("Success", "Album has been updated.");
+                MessageUserControl.ShowInfo("", "SUCCESS: Album has been updated.");
             }
             else
             {
@@ -163,7 +164,7 @@ namespace WebApp.SamplePages
         {
             if (e.Exception == null)
             {
-                MessageUserControl.ShowInfo("Success", "Album has been removed.");
+                MessageUserControl.ShowInfo("", "SUCCESS: Album has been removed.");
             }
             else
             {
