@@ -18,8 +18,19 @@ namespace ChinookSystem.BLL
 	[DataObject]
 	public class PlayListController
 	{
-        #region Queries
-        [DataObjectMethod(DataObjectMethodType.Select, false)]
+		[DataObjectMethod(DataObjectMethodType.Select, false)]
+		public List<PlayListItem> List_PlayListNames()
+		{
+			using (var context = new ChinookSystemContext())
+			{
+
+			}
+			return null;
+		}
+
+
+		#region Queries
+		[DataObjectMethod(DataObjectMethodType.Select, false)]
 		public List<PlayListItem> PlayList_GetPlayListOfSize(int lowestplaylistsize)
 		{
 			using (var context = new ChinookSystemContext())

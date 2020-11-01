@@ -14,33 +14,50 @@
         <uc1:MessageUserControl runat="server" ID="MessageUserControl" />
     </div>
     <div class="row">
-        <div class="col-sm-3">
+        <div class="col-sm-2">
             <asp:Label ID="Label1" runat="server" Text="Artist" ></asp:Label>&nbsp;&nbsp;
-            <asp:TextBox ID="ArtistName" runat="server" placeholder="artist name" Width="200"></asp:TextBox>
+            <asp:TextBox ID="ArtistName" runat="server" placeholder="artist name" Width="100"></asp:TextBox>
             <asp:Button ID="ArtistFetch" runat="server" Text="Fetch" 
-                OnCommand="Button_Command" CommandName="Artist"/><br /><br />
+                OnCommand="Tracks_Button_Command" CommandName="Artist"/><br /><br />
+
             <asp:Label ID="Label2" runat="server" Text="Media"></asp:Label>
-            <asp:DropDownList ID="MediaTypeDDL" runat="server" Width="200"
+            <asp:DropDownList ID="MediaTypeDDL" runat="server" Width="100"
                 DataSourceID="MediaTypeDDLODS" 
                 DataTextField="DisplayText" 
                 DataValueField="IDValueField">
             </asp:DropDownList>
             <asp:Button ID="MediaTypeFetch" runat="server" Text="Fetch" 
-                 OnCommand="Button_Command" CommandName="MediaType" /><br /><br />
+                 OnCommand="Tracks_Button_Command" CommandName="MediaType" /><br /><br />
+
             <asp:Label ID="Label3" runat="server" Text="Genre"></asp:Label>
-            <asp:DropDownList ID="GenreDDL" runat="server" Width="200"
+            <asp:DropDownList ID="GenreDDL" runat="server" Width="100"
                 DataSourceID="GenreDDLODS" 
                 DataTextField="DisplayText" 
                 DataValueField="IDValueField">
             </asp:DropDownList>
             <asp:Button ID="GenreFetch" runat="server" Text="Fetch" 
-                OnCommand="Button_Command" CommandName="Genre" /><br /><br />
+                OnCommand="Tracks_Button_Command" CommandName="Genre" /><br /><br />
+
             <asp:Label ID="Label4" runat="server" Text="Album"></asp:Label>
-            <asp:TextBox ID="AlbumTitle" runat="server" placeholder="album title" Width="200"></asp:TextBox>
+            <asp:TextBox ID="AlbumTitle" runat="server" placeholder="album title" Width="100"></asp:TextBox>
             <asp:Button ID="AlbumFetch" runat="server" Text="Fetch" 
-                OnCommand="Button_Command" CommandName="Album" /><br /><br />
+                OnCommand="Tracks_Button_Command" CommandName="Album" /><br /><br />
+
+            <asp:Label ID="Label5" runat="server" Text="Existing Playlist"></asp:Label>
+            <asp:DropDownList ID="ExistingPlayListDDL" runat="server" Width="100"
+                DataSourceID="ExistingPlayListDDLODS" 
+                DataTextField="DisplayText" 
+                DataValueField="IDValueField">
+            </asp:DropDownList>
+            <asp:Button ID="ExistingPlayListButton" runat="server" Text="Fetch" 
+                OnCommand="PlayList_Button_Command" CommandName="Existing" /><br /><br />
+
+            <asp:Label ID="Label6" runat="server" Text="New Playlist"></asp:Label>
+            <asp:TextBox ID="NewPlayListName" runat="server" Width="100"></asp:TextBox>
+            <asp:Button ID="NewPlayListButton" runat="server" Text="New" 
+                OnCommand="PlayList_Button_Command" CommandName="New" /><br /><br />
         </div>
-        <div class="col-sm-9">
+        <div class="col-sm-10">
             <asp:Panel ID="QueryPanel" runat="server" Visible="true">
                 <asp:Label ID="TracksBy" runat="server" ></asp:Label>&nbsp;&nbsp;
                 <asp:Label ID="SearchArg" runat="server" ></asp:Label>
@@ -140,12 +157,8 @@
                     </table>
                 </LayoutTemplate>
             </asp:ListView>
-
             <br /><br />
-            <%--<asp:Label ID="Label6" runat="server" Text="Playlist Name:"></asp:Label>
-            <asp:TextBox ID="PlaylistName" runat="server"></asp:TextBox>
-            <asp:Button ID="PlayListFetch" runat="server" Text="Fetch" OnClick="PlayListFetch_Click" 
-                />--%>
+            
 
             <asp:GridView ID="MyPlayList" runat="server" AutoGenerateColumns="False"
                  Caption="PlayList" GridLines="Horizontal" BorderStyle="None" 
@@ -164,13 +177,13 @@
                             <%--OnClientClick="return confirm('Are you sure you wish to remove the selected song(s)?')"--%>
                             <asp:LinkButton ID="MoveUp" runat="server"
                                 CommandName="MoveUpOnMyPlayList"
-                                CommandArgument='<%# Item.TrackID %>'
+                                CommandArgument="<%# Container.DataItemIndex %>"
                                 CssClass="btn">
                                 <i class="fa fa-chevron-up" style="color:blue;"></i>&nbsp;
                             </asp:LinkButton>
                             <asp:LinkButton ID="MoveDown" runat="server"
                                 CommandName="MoveDownOnMyPlayList"
-                                CommandArgument='<%# Item.TrackID %>'
+                                CommandArgument="<%# Container.DataItemIndex %>"
                                 CssClass="btn"  >
                                 <i class="fa fa-chevron-down" style="color:blue;"></i>&nbsp;
                             </asp:LinkButton>
@@ -228,6 +241,12 @@
         OldValuesParameterFormatString="original_{0}" 
         SelectMethod="List_GenreNames" 
         TypeName="ChinookSystem.BLL.GenreController"
+         OnSelected="CheckForException">
+    </asp:ObjectDataSource>
+    <asp:ObjectDataSource ID="ExistingPlayListDDLODS" runat="server" 
+        OldValuesParameterFormatString="original_{0}" 
+        SelectMethod="List_PlayListNames" 
+        TypeName="ChinookSystem.BLL.PlayListController"
          OnSelected="CheckForException">
     </asp:ObjectDataSource>
     <asp:ObjectDataSource ID="TracksSelectionListODS" runat="server" 

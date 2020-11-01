@@ -20,9 +20,11 @@ namespace WebApp.SamplePages
         {
             TracksSelectionList.DataSource = null;
             MessageUserControl.ShowInfo("");
+            //TracksBy.Text = "";
+            //SearchArg.Text = "";
         }
 
-        protected void Button_Command(Object sender, System.Web.UI.WebControls.CommandEventArgs e)
+        protected void Tracks_Button_Command(Object sender, System.Web.UI.WebControls.CommandEventArgs e)
         {
             TracksBy.Text = e.CommandName;
             switch (e.CommandName)
@@ -49,22 +51,25 @@ namespace WebApp.SamplePages
             TracksSelectionList.DataBind();
         }
 
+        protected void PlayList_Button_Command(Object sender, System.Web.UI.WebControls.CommandEventArgs e)
+        {
+        }
+
         protected void MyPlayList_RowCommand(object sender, GridViewCommandEventArgs e)
         {
+            int rowIndex = Convert.ToInt32(e.CommandArgument);
+            var playListItems = GetPlayListItemsFromGridView();
+            var playListItem = playListItems[rowIndex];
             if (e.CommandName == "DeleteFromMyPlayList")
             {
-                MessageUserControl.ShowInfo("", "MESSAGE: DeleteFromMyPlayList");
-                int rowIndex = Convert.ToInt32(e.CommandArgument);
-                MessageUserControl.ShowInfo("", "MESSAGE: " + rowIndex.ToString());
+                MessageUserControl.ShowInfo("", "MESSAGE: DeleteFromMyPlayList, index: " + 
+                    rowIndex.ToString());
 
                 //Reference the GridView Row.
                 GridViewRow row = MyPlayList.Rows[rowIndex];
 
-                //Fetch value of Name.
-                //string name = (row.FindControl("txtName") as TextBox).Text;
-
-                var playListItems = GetPlayListItemsFromGridView();
-                playListItems.Remove(playListItems[rowIndex]);
+                
+                playListItems.Remove(playListItem);
                 MyPlayList.DataSource = playListItems;
                 MyPlayList.DataBind();
                 e.Handled = true;
@@ -72,11 +77,25 @@ namespace WebApp.SamplePages
             }
             else if (e.CommandName == "MoveUpOnMyPlayList")
             {
-                MessageUserControl.ShowInfo("", "MESSAGE: MoveUpOnMyPlayList");
+                MessageUserControl.ShowInfo("", "MESSAGE: MoveUpOnMyPlayList, index: " + 
+                    rowIndex.ToString());
+
+                //Reference the GridView Row.
+                //GridViewRow row = MyPlayList.Rows[rowIndex];
+                if(rowIndex != 0)
+                {
+                    playListItems.Remove(playListItem);
+                    playListItems.Insert(rowIndex - 1, playListItem);
+                    MyPlayList.DataSource = playListItems;
+                    MyPlayList.DataBind();
+                }
+                e.Handled = true;
+                
             }
             else if (e.CommandName == "MoveDownOnMyPlayList")
             {
-                MessageUserControl.ShowInfo("", "MESSAGE: MoveDownOnMyPlayList");
+                MessageUserControl.ShowInfo("", "MESSAGE: MoveDownOnMyPlayList, index: " +
+                    rowIndex.ToString());
             }
         }
 
@@ -173,6 +192,7 @@ namespace WebApp.SamplePages
         }
         #endregion
     }
+    #region Web Extensions
     public static class WebControlExtensions
     {
         public static Label FindLabel(this Control self, string id)
@@ -186,4 +206,5 @@ namespace WebApp.SamplePages
         public static int ToInt(this string self) => int.Parse(self);
         public static decimal ToDecimal(this string self) => decimal.Parse(self);
     }
+    #endregion
 }
