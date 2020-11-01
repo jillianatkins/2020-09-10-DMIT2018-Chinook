@@ -159,9 +159,8 @@
             </asp:ListView>
             <br /><br />
             
-
             <asp:GridView ID="MyPlayList" runat="server" AutoGenerateColumns="False"
-                 Caption="PlayList" GridLines="Horizontal" BorderStyle="None" 
+                GridLines="Horizontal" BorderStyle="None" 
                 ItemType="ChinookSystem.VIEWMODELS.UserPlayListTrack" 
                 DataKeyNames="TrackID"
                 OnRowCommand="MyPlayList_RowCommand" >
@@ -256,10 +255,10 @@
          OnSelected="CheckForException">
         <SelectParameters>
             <asp:ControlParameter ControlID="TracksBy"
-                PropertyName="Text" DefaultValue="xcvdfg"
+                PropertyName="Text" DefaultValue="none"
                 Name="tracksby" Type="String"></asp:ControlParameter>
             <asp:ControlParameter ControlID="SearchArg" 
-                PropertyName="Text" DefaultValue="cnvbj" 
+                PropertyName="Text" DefaultValue="none" 
                 Name="arg" Type="String"></asp:ControlParameter>
         </SelectParameters>
     </asp:ObjectDataSource>
