@@ -82,17 +82,19 @@ namespace WebApp.SamplePages
         List<UserPlayListTrack> GetPlayListItemsFromGridView()
         {
             var list = new List<UserPlayListTrack>();
+            int trackNumber = 2;
             foreach (GridViewRow row in MyPlayList.Rows)
             {
                 var item = new UserPlayListTrack
                 {
                     TrackID = row.FindLabel("TrackId").Text.ToInt(),
-                    TrackNumber = 1,
+                    TrackNumber = trackNumber,
                     TrackName = row.FindLabel("TrackName").Text,
                     Milliseconds = row.FindLabel("Milliseconds").Text.ToInt(),
                     UnitPrice = row.FindLabel("UnitPrice").Text.ToDecimal()
                 };
                 list.Add(item);
+                trackNumber++;
             }
             return list;
         }
@@ -107,6 +109,7 @@ namespace WebApp.SamplePages
                 MessageUserControl.ShowInfo("", "MESSAGE: DeleteFromMyPlayList, index: " +
                     rowIndex.ToString());
                 playListItems.Remove(playListItem);
+                resetPlayListTrackNumbers(playListItems);
                 MyPlayList.DataSource = playListItems;
                 MyPlayList.DataBind();
                 e.Handled = true;
@@ -120,6 +123,7 @@ namespace WebApp.SamplePages
                 {
                     playListItems.Remove(playListItem);
                     playListItems.Insert(rowIndex - 1, playListItem);
+                    resetPlayListTrackNumbers(playListItems);
                     MyPlayList.DataSource = playListItems;
                     MyPlayList.DataBind();
                 }
@@ -133,9 +137,20 @@ namespace WebApp.SamplePages
                 {
                     playListItems.Remove(playListItem);
                     playListItems.Insert(rowIndex + 1, playListItem);
+                    resetPlayListTrackNumbers(playListItems);
                     MyPlayList.DataSource = playListItems;
                     MyPlayList.DataBind();
                 }
+            }
+        }
+
+        void resetPlayListTrackNumbers(List<UserPlayListTrack> playListItems)
+        {
+            var trackNumber = 1;
+            foreach(UserPlayListTrack track in playListItems)
+            {
+                track.TrackNumber = trackNumber;
+                trackNumber++;
             }
         }
         #endregion

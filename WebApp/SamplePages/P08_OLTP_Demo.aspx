@@ -195,10 +195,10 @@
                             &nbsp;&nbsp;
                         </ItemTemplate>
                     </asp:TemplateField>
-                    <asp:TemplateField HeaderText="Track">
+                    <asp:TemplateField HeaderText="TNum">
                         <ItemTemplate>
                             <asp:Label runat="server" ID="TrackNumber" Width="40px"
-                                Text='<%# Item.TrackID %>'></asp:Label>
+                                Text='<%# Item.TrackNumber %>'></asp:Label>
                               &nbsp;&nbsp;
                         </ItemTemplate>
                     </asp:TemplateField>
