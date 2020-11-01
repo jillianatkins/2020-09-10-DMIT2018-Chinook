@@ -20,8 +20,6 @@ namespace WebApp.SamplePages
         {
             TracksSelectionList.DataSource = null;
             MessageUserControl.ShowInfo("");
-            //TracksBy.Text = "";
-            //SearchArg.Text = "";
         }
 
         protected void Tracks_Button_Command(Object sender, System.Web.UI.WebControls.CommandEventArgs e)
@@ -55,65 +53,10 @@ namespace WebApp.SamplePages
         {
         }
 
-        protected void MyPlayList_RowCommand(object sender, GridViewCommandEventArgs e)
-        {
-            int rowIndex = Convert.ToInt32(e.CommandArgument);
-            List<UserPlayListTrack> playListItems = GetPlayListItemsFromGridView();
-            var playListItem = playListItems[rowIndex];
-            if (e.CommandName == "DeleteFromMyPlayList")
-            {
-                MessageUserControl.ShowInfo("", "MESSAGE: DeleteFromMyPlayList, index: " + 
-                    rowIndex.ToString());
-
-                //Reference the GridView Row.
-                GridViewRow row = MyPlayList.Rows[rowIndex];
-
-                
-                playListItems.Remove(playListItem);
-                MyPlayList.DataSource = playListItems;
-                MyPlayList.DataBind();
-                e.Handled = true;
-
-            }
-            else if (e.CommandName == "MoveUpOnMyPlayList")
-            {
-                MessageUserControl.ShowInfo("", "MESSAGE: MoveUpOnMyPlayList, index: " + 
-                    rowIndex.ToString());
-                if(rowIndex != 0)
-                {
-                    playListItems.Remove(playListItem);
-                    playListItems.Insert(rowIndex - 1, playListItem);
-                    MyPlayList.DataSource = playListItems;
-                    MyPlayList.DataBind();
-                }
-                e.Handled = true;  
-            }
-            else if (e.CommandName == "MoveDownOnMyPlayList")
-            {
-                MessageUserControl.ShowInfo("", "MESSAGE: MoveDownOnMyPlayList, index: " +
-                    rowIndex.ToString());
-                if (rowIndex != playListItems.Count-1)
-                {
-                    playListItems.Remove(playListItem);
-                    playListItems.Insert(rowIndex + 1, playListItem);
-                    MyPlayList.DataSource = playListItems;
-                    MyPlayList.DataBind();
-                }
-            }
-        }
-
-
-
-
-
         protected void TracksSelectionList_ItemCommand(object sender, ListViewCommandEventArgs e)
         {
             if (e.CommandName == "AddToMyPlayList")
             {
-                //LinkButton button = e.Item.FindControl("AddToCart") as LinkButton;
-                //button.Enabled = false;
-                //button.CssClass += " disabled";
-
                 UserPlayListTrack item = GetTrackFromTracksListToAddToPlayList(e.Item);
                 var playListItems = GetPlayListItemsFromGridView();
                 playListItems.Insert(0, item);
@@ -153,6 +96,49 @@ namespace WebApp.SamplePages
             }
             return list;
         }
+        #region PlayList Row Commands (Delete, MoveUp, MoveDown)
+        protected void MyPlayList_RowCommand(object sender, GridViewCommandEventArgs e)
+        {
+            int rowIndex = Convert.ToInt32(e.CommandArgument);
+            List<UserPlayListTrack> playListItems = GetPlayListItemsFromGridView();
+            var playListItem = playListItems[rowIndex];
+            if (e.CommandName == "DeleteFromMyPlayList")
+            {
+                MessageUserControl.ShowInfo("", "MESSAGE: DeleteFromMyPlayList, index: " +
+                    rowIndex.ToString());
+                playListItems.Remove(playListItem);
+                MyPlayList.DataSource = playListItems;
+                MyPlayList.DataBind();
+                e.Handled = true;
+
+            }
+            else if (e.CommandName == "MoveUpOnMyPlayList")
+            {
+                MessageUserControl.ShowInfo("", "MESSAGE: MoveUpOnMyPlayList, index: " +
+                    rowIndex.ToString());
+                if (rowIndex != 0)
+                {
+                    playListItems.Remove(playListItem);
+                    playListItems.Insert(rowIndex - 1, playListItem);
+                    MyPlayList.DataSource = playListItems;
+                    MyPlayList.DataBind();
+                }
+                e.Handled = true;
+            }
+            else if (e.CommandName == "MoveDownOnMyPlayList")
+            {
+                MessageUserControl.ShowInfo("", "MESSAGE: MoveDownOnMyPlayList, index: " +
+                    rowIndex.ToString());
+                if (rowIndex != playListItems.Count - 1)
+                {
+                    playListItems.Remove(playListItem);
+                    playListItems.Insert(rowIndex + 1, playListItem);
+                    MyPlayList.DataSource = playListItems;
+                    MyPlayList.DataBind();
+                }
+            }
+        }
+        #endregion
 
         #region Error Handling
         protected void CheckForException(object sender, ObjectDataSourceStatusEventArgs e)
