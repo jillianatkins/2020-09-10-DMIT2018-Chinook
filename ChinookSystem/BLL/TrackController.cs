@@ -34,7 +34,8 @@ namespace ChinookSystem.BLL
                 return results.ToList();
             }
         }
-
+        #endregion
+        #region TracksForPlaylistSelection
         [DataObjectMethod(DataObjectMethodType.Select, false)]
         public List<TrackList> List_TracksForPlaylistSelection(string tracksby, string arg)
         {
