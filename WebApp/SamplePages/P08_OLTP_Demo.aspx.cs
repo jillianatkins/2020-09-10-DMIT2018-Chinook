@@ -74,7 +74,6 @@ namespace WebApp.SamplePages
                 TrackNumber = 1,
                 TrackName = item.FindLabel("NameLabel").Text,
                 Milliseconds = item.FindLabel("MillisecondsLabel").Text.ToInt(),
-                //Bytes = item.FindLabel("BytesLabel").Text.ToInt(),
                 UnitPrice = item.FindLabel("UnitPriceLabel").Text.ToDecimal()
             };
             return track;
