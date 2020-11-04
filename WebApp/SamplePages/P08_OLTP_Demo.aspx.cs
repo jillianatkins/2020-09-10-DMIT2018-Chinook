@@ -21,7 +21,7 @@ namespace WebApp.SamplePages
             TracksSelectionList.DataSource = null;
             MessageUserControl.ShowInfo("");
         }
-
+        #region TrackList Item Command and Building of the GridView
         protected void Tracks_Button_Command(Object sender, System.Web.UI.WebControls.CommandEventArgs e)
         {
             TracksBy.Text = e.CommandName;
@@ -49,9 +49,9 @@ namespace WebApp.SamplePages
             TracksSelectionList.DataBind();
         }
 
-        protected void PlayList_Button_Command(Object sender, System.Web.UI.WebControls.CommandEventArgs e)
-        {
-        }
+        //protected void PlayList_Button_Command(Object sender, System.Web.UI.WebControls.CommandEventArgs e)
+        //{
+        //}
 
         protected void TracksSelectionList_ItemCommand(object sender, ListViewCommandEventArgs e)
         {
@@ -97,6 +97,8 @@ namespace WebApp.SamplePages
             }
             return list;
         }
+        #endregion
+
         #region PlayList Row Commands (Delete, MoveUp, MoveDown)
         protected void MyPlayList_RowCommand(object sender, GridViewCommandEventArgs e)
         {
