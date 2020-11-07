@@ -18,8 +18,48 @@ namespace ChinookSystem.BLL
 	[DataObject]
 	public class PlayListController
 	{
-        #region Query for OLTP Demo Existing PlayList DDL
-        [DataObjectMethod(DataObjectMethodType.Select, false)]
+		#region Query for OLTP Demo PlayList for GridView
+		[DataObjectMethod(DataObjectMethodType.Select, false)]
+		public List<UserPlayListTrack> List_PlayList(string existingOrNew, string existingIDOrNewName)
+		{
+			using (var context = new ChinookSystemContext())
+			{
+				IEnumerable<UserPlayListTrack> results = null;
+				if (existingOrNew.Equals("Existing"))
+				{
+					int narg = int.Parse(existingIDOrNewName);
+					results = from x in context.PlaylistTracks
+							  where x.PlaylistId == narg
+							  orderby x.TrackNumber
+							  select new UserPlayListTrack
+							  {
+								  TrackID = x.Track.TrackId,
+								  TrackNumber = x.TrackNumber,
+								  TrackName = x.Track.Name,
+								  Milliseconds = x.Track.Milliseconds,
+								  UnitPrice = x.Track.UnitPrice
+							  };
+					//throw new Exception("PlayListController, List_PlayList, (Existing) NOT implemented yet");
+				}
+				else if (existingOrNew.Equals("New"))
+				{
+					throw new Exception("PlayListController, List_PlayList, (New) NOT implemented yet");
+				}
+
+				if (results == null)
+				{
+					return null;
+				}
+				else
+				{
+					return results.ToList();
+				}
+			}
+		}
+				#endregion
+
+				#region Query for OLTP Demo Existing PlayList DDL
+				[DataObjectMethod(DataObjectMethodType.Select, false)]
 		public List<SelectionList> GetPlayListForDDLByUserName()
 		{
 			using (var context = new ChinookSystemContext())

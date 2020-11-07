@@ -16,7 +16,7 @@ namespace ChinookSystem.BLL
     [DataObject]
     public class TrackController
     {
-        #region Queries
+        #region Query Track_List
         [DataObjectMethod(DataObjectMethodType.Select, false)]
         public List<TrackViewModel> Track_List()
         {
@@ -35,7 +35,8 @@ namespace ChinookSystem.BLL
             }
         }
         #endregion
-        #region TracksForPlaylistSelection
+
+        #region Query TracksForPlaylistSelection
         [DataObjectMethod(DataObjectMethodType.Select, false)]
         public List<TrackList> List_TracksForPlaylistSelection(string tracksby, string arg)
         {

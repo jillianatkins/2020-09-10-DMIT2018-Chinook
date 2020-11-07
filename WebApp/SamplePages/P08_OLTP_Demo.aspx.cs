@@ -56,7 +56,8 @@ namespace WebApp.SamplePages
             {
                 case ("Existing"):
                     MessageUserControl.ShowInfo("", "MESSAGE: Existing PlayList");
-                    //SearchArg.Text = MediaTypeDDL.SelectedValue;
+                    ExistingIDOrNewName.Text = ExistingPlayListDDL.SelectedValue;
+                    MyPlayList.DataSourceID = "PlayListODS";
                     break;
                 case ("New"):
                     if (string.IsNullOrEmpty(NewPlayListName.Text))
@@ -64,11 +65,11 @@ namespace WebApp.SamplePages
                     else
                     {
                         MessageUserControl.ShowInfo("", "MESSAGE: New PlayList");
-                        //SearchArg.Text = ArtistName.Text;
+                        ExistingIDOrNewName.Text = NewPlayListName.Text;
                     }
                     break;
             }
-            //TracksSelectionList.DataBind();
+            MyPlayList.DataBind();
         }
 
         protected void TracksSelectionList_ItemCommand(object sender, ListViewCommandEventArgs e)
@@ -78,6 +79,7 @@ namespace WebApp.SamplePages
                 UserPlayListTrack item = GetTrackFromTracksListToAddToPlayList(e.Item);
                 var playListItems = GetPlayListItemsFromGridView();
                 playListItems.Insert(0, item);
+                MyPlayList.DataSourceID = "";
                 MyPlayList.DataSource = playListItems;
                 MyPlayList.DataBind();
                 e.Handled = true;
@@ -129,6 +131,7 @@ namespace WebApp.SamplePages
                     rowIndex.ToString());
                 playListItems.Remove(playListItem);
                 resetPlayListTrackNumbers(playListItems);
+                MyPlayList.DataSourceID = "";
                 MyPlayList.DataSource = playListItems;
                 MyPlayList.DataBind();
                 e.Handled = true;
@@ -143,6 +146,7 @@ namespace WebApp.SamplePages
                     playListItems.Remove(playListItem);
                     playListItems.Insert(rowIndex - 1, playListItem);
                     resetPlayListTrackNumbers(playListItems);
+                    MyPlayList.DataSourceID = "";
                     MyPlayList.DataSource = playListItems;
                     MyPlayList.DataBind();
                 }
@@ -157,6 +161,7 @@ namespace WebApp.SamplePages
                     playListItems.Remove(playListItem);
                     playListItems.Insert(rowIndex + 1, playListItem);
                     resetPlayListTrackNumbers(playListItems);
+                    MyPlayList.DataSourceID = "";
                     MyPlayList.DataSource = playListItems;
                     MyPlayList.DataBind();
                 }

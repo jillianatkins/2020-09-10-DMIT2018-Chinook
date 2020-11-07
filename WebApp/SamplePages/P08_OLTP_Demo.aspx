@@ -164,7 +164,8 @@
             </asp:Panel>
             
             <asp:GridView ID="MyPlayList" runat="server" AutoGenerateColumns="False"
-                GridLines="Horizontal" BorderStyle="None" 
+                GridLines="Horizontal" BorderStyle="None"
+                DataSourceID="PlayListODS"
                 ItemType="ChinookSystem.VIEWMODELS.UserPlayListTrack" 
                 DataKeyNames="TrackID"
                 OnRowCommand="MyPlayList_RowCommand" >
@@ -248,7 +249,7 @@
     </asp:ObjectDataSource>
     <asp:ObjectDataSource ID="ExistingPlayListDDLODS" runat="server" 
         OldValuesParameterFormatString="original_{0}" 
-        SelectMethod="List_PlayListNames" 
+        SelectMethod="GetPlayListForDDLByUserName" 
         TypeName="ChinookSystem.BLL.PlayListController"
          OnSelected="CheckForException">
     </asp:ObjectDataSource>
@@ -264,6 +265,23 @@
             <asp:ControlParameter ControlID="SearchArg" 
                 PropertyName="Text" DefaultValue="none" 
                 Name="arg" Type="String"></asp:ControlParameter>
+        </SelectParameters>
+    </asp:ObjectDataSource>
+
+    
+
+    <asp:ObjectDataSource ID="PlayListODS" runat="server" 
+        OldValuesParameterFormatString="original_{0}" 
+        SelectMethod="List_PlayList" 
+        TypeName="ChinookSystem.BLL.PlayListController"
+         OnSelected="CheckForException">
+        <SelectParameters>
+            <asp:ControlParameter ControlID="ExistingOrNew"
+                PropertyName="Text" DefaultValue="none"
+                Name="existingOrNew" Type="String"></asp:ControlParameter>
+            <asp:ControlParameter ControlID="ExistingIDOrNewName" 
+                PropertyName="Text" DefaultValue="none" 
+                Name="existingIDOrNewName" Type="String"></asp:ControlParameter>
         </SelectParameters>
     </asp:ObjectDataSource>
 </asp:Content>
