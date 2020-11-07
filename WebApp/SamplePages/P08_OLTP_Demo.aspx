@@ -157,7 +157,11 @@
                     </table>
                 </LayoutTemplate>
             </asp:ListView>
-            <br /><br />
+            <br />
+            <asp:Panel ID="PanelPlayList" runat="server" Visible="true">
+                <asp:Label ID="ExistingOrNew" runat="server" ></asp:Label>&nbsp;&nbsp;
+                <asp:Label ID="ExistingIDOrNewName" runat="server" ></asp:Label>
+            </asp:Panel>
             
             <asp:GridView ID="MyPlayList" runat="server" AutoGenerateColumns="False"
                 GridLines="Horizontal" BorderStyle="None" 

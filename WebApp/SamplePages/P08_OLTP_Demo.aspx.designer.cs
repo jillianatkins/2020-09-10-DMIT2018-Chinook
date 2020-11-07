@@ -222,6 +222,33 @@ namespace WebApp.SamplePages
         protected global::System.Web.UI.WebControls.ListView TracksSelectionList;
 
         /// <summary>
+        /// PanelPlayList control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel PanelPlayList;
+
+        /// <summary>
+        /// ExistingOrNew control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label ExistingOrNew;
+
+        /// <summary>
+        /// ExistingIDOrNewName control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label ExistingIDOrNewName;
+
+        /// <summary>
         /// MyPlayList control.
         /// </summary>
         /// <remarks>

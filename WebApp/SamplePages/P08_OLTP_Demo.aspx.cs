@@ -51,6 +51,24 @@ namespace WebApp.SamplePages
 
         protected void PlayList_Button_Command(Object sender, System.Web.UI.WebControls.CommandEventArgs e)
         {
+            ExistingOrNew.Text = e.CommandName;
+            switch (e.CommandName)
+            {
+                case ("Existing"):
+                    MessageUserControl.ShowInfo("", "MESSAGE: Existing PlayList");
+                    //SearchArg.Text = MediaTypeDDL.SelectedValue;
+                    break;
+                case ("New"):
+                    if (string.IsNullOrEmpty(NewPlayListName.Text))
+                        MessageUserControl.ShowInfo("", "ERROR: Give a new PlayList name.");
+                    else
+                    {
+                        MessageUserControl.ShowInfo("", "MESSAGE: New PlayList");
+                        //SearchArg.Text = ArtistName.Text;
+                    }
+                    break;
+            }
+            //TracksSelectionList.DataBind();
         }
 
         protected void TracksSelectionList_ItemCommand(object sender, ListViewCommandEventArgs e)

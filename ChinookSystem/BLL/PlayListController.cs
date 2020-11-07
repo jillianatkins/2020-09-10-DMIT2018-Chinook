@@ -29,7 +29,7 @@ namespace ChinookSystem.BLL
 		}
 
 
-		#region Queries
+		#region Query for Repeater Demo
 		[DataObjectMethod(DataObjectMethodType.Select, false)]
 		public List<PlayListItem> PlayList_GetPlayListOfSize(int lowestplaylistsize)
 		{
