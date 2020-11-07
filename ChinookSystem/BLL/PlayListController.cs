@@ -18,16 +18,24 @@ namespace ChinookSystem.BLL
 	[DataObject]
 	public class PlayListController
 	{
-		[DataObjectMethod(DataObjectMethodType.Select, false)]
-		public List<PlayListItem> List_PlayListNames()
+        #region Query for OLTP Demo Existing PlayList DDL
+        [DataObjectMethod(DataObjectMethodType.Select, false)]
+		public List<SelectionList> GetPlayListForDDLByUserName()
 		{
 			using (var context = new ChinookSystemContext())
 			{
-
+				var userName = "RobbinLaw";
+				var results = from x in context.Playlists
+							  where x.UserName == userName
+							  select new SelectionList
+							  {
+								  IDValueField = x.PlaylistId,
+								  DisplayText = x.Name
+							  };
+				return results.ToList();
 			}
-			return null;
 		}
-
+		#endregion
 
 		#region Query for Repeater Demo
 		[DataObjectMethod(DataObjectMethodType.Select, false)]
