@@ -7,6 +7,7 @@ using System.Web.UI.WebControls;
 
 #region Additional Namespaces
 using System.ComponentModel;
+using ChinookSystem.BLL;
 using ChinookSystem.DAL;
 using ChinookSystem.VIEWMODELS;
 using ChinookSystem.ENTITIES;
@@ -18,26 +19,11 @@ namespace WebApp.SamplePages
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            //throw new Exception("Page_Load, Hey Man");
-            //MessageUserControl.ShowInfo("", "ERROR: Hey Man");
-            //TracksSelectionList.DataSource = null;
-            MyPlayList.DataSourceID = "";
+            
             MessageUserControl.ShowInfo("");
-            UserName.Text = TextBoxUserName.Text;
-        }
-        protected void Page_PreRender(object sender, EventArgs e)
-        {
-            //throw new Exception("Page_Load, Hey Man");
-            if (!IsPostBack)
-            {
-                MessageUserControl.ShowInfo("", "ERROR: Hey Man");
-            }
            
-            //TracksSelectionList.DataSource = null;
-            //MyPlayList.DataSourceID = "";
-            //MessageUserControl.ShowInfo("");
-            //UserName.Text = TextBoxUserName.Text;
         }
+        
         #region TrackList Item Command and Building of the GridView
         protected void Tracks_Button_Command(Object sender, System.Web.UI.WebControls.CommandEventArgs e)
         {
@@ -74,26 +60,41 @@ namespace WebApp.SamplePages
             }
             else
             {
-                ExistingOrNew.Text = e.CommandName;
                 switch (e.CommandName)
                 {
                     case ("Existing"):
-                        MessageUserControl.ShowInfo("", "MESSAGE: Existing PlayList");
-                        UserName.Text = TextBoxUserName.Text;
-                        ExistingIDOrNewName.Text = ExistingPlayListDDL.SelectedValue;
-                        MyPlayList.DataSourceID = "PlayListODS";
-                        MyPlayList.DataBind();
+                        //how do we do error handling using MessageUserControl if the
+                        //   code executing is NOT part of an ODS
+                        //you could use Try/Catch (BUT WE WON'T)
+                        //if you examine the source code of MessageUserControl, you will
+                        //  find embedded within the code the Try/Catch
+                        //the syntax:
+                        //  MessageUserControl.TryRun( () => {coding block});
+                        //  MessageUserControl.TryRun( () => {coding block},"success title","successmessage");
+                        MessageUserControl.TryRun(() => {
+                            PlayListController sysmgr = new PlayListController();
+                            List<UserPlayListTrack> info = sysmgr.ListExistingPlayList
+                                (ExistingPlayListDDL.SelectedValue);
+                            MyPlayList.DataSource = info;
+                            MyPlayList.DataBind();
+                        }, "", "SUCCESS: PlayList Retrieved");
                         break;
                     case ("New"):
                         if (string.IsNullOrEmpty(NewPlayListName.Text))
                             MessageUserControl.ShowInfo("", "ERROR: Give a new PlayList name.");
                         else
                         {
-                            MessageUserControl.ShowInfo("", "MESSAGE: New PlayList");
-                            ExistingIDOrNewName.Text = NewPlayListName.Text;
-                            //MyPlayList.DataSourceID = "PlayListODS";
-                            MyPlayList.DataBind();
+                            MessageUserControl.ShowInfo("", "MESSAGE: New PlayList, NOT IMPLEMENTED");
                         }
+                        break;
+                    case ("Save"):
+                        var playListItems = GetPlayListItemsFromGridView();
+                        MessageUserControl.TryRun(() => {
+                            PlayListController sysmgr = new PlayListController();
+                            sysmgr.SavePlayList(playListItems);
+                            //MyPlayList.DataSource = info;
+                            //MyPlayList.DataBind();
+                        }, "", "SUCCESS: PlayList Saved");
                         break;
                 }
             }  
@@ -106,16 +107,10 @@ namespace WebApp.SamplePages
                 UserPlayListTrack item = GetTrackFromTracksListToAddToPlayList(e.Item);
                 var playListItems = GetPlayListItemsFromGridView();
                 playListItems.Insert(0, item);
-                //MyPlayList.DataSourceID = "";
-                PopulateMyPlayList(playListItems);
+                MyPlayList.DataSource = playListItems;
+                MyPlayList.DataBind();
                 e.Handled = true;
             }
-        }
-
-        private void PopulateMyPlayList(List<UserPlayListTrack> playListItems)
-        {
-            MyPlayList.DataSource = playListItems;
-            MyPlayList.DataBind();
         }
 
         UserPlayListTrack GetTrackFromTracksListToAddToPlayList(ListViewItem item)

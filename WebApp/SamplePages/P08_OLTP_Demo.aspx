@@ -60,6 +60,9 @@
             <asp:TextBox ID="NewPlayListName" runat="server" Width="100"></asp:TextBox>
             <asp:Button ID="NewPlayListButton" runat="server" Text="New" 
                 OnCommand="PlayList_Buttons_Command" CommandName="New" /><br /><br />
+
+            <asp:Button ID="ButtonSavePlayList" runat="server" Text="Save PlayList" 
+                OnCommand="PlayList_Buttons_Command" CommandName="Save" /><br /><br />
         </div>
         <div class="col-sm-10">
             <asp:Panel ID="QueryPanel" runat="server" Visible="true">
@@ -257,7 +260,7 @@
         TypeName="ChinookSystem.BLL.PlayListController"
          OnSelected="CheckForException">
         <SelectParameters>
-            <asp:ControlParameter ControlID="UserName"
+            <asp:ControlParameter ControlID="TextBoxUserName"
                 PropertyName="Text" DefaultValue="none"
                 Name="userName" Type="String">
             </asp:ControlParameter>
