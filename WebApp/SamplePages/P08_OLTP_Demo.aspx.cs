@@ -18,16 +18,12 @@ namespace WebApp.SamplePages
 {
     public partial class P08_OLTP_Demo : System.Web.UI.Page
     {
-        bool userNameIsValid;
         protected void Page_Load(object sender, EventArgs e)
         {
-            
-            MessageUserControl.ShowInfo("Hey Man");
             ArtistName.Attributes.Add("onkeydown", "return (event.keyCode!=13);");
             AlbumTitle.Attributes.Add("onkeydown", "return (event.keyCode!=13);");
             TextBoxUserName.Attributes.Add("onkeydown", "return (event.keyCode!=13);");
             NewPlayListName.Attributes.Add("onkeydown", "return (event.keyCode!=13);");
-
         }
         protected void CheckForValidUserName(object sender, EventArgs e)
         {
@@ -42,7 +38,6 @@ namespace WebApp.SamplePages
             {
                 ExistingPlayListDDL.DataBind();
             }
-
         }
 
         private bool UserNameCheck()
@@ -86,8 +81,6 @@ namespace WebApp.SamplePages
             if (userNameIsValid == false)
             {
                 MessageUserControl.ShowInfo("", "ERROR: (PlayList_Buttons) User Name is NOT VALID");
-                MyPlayList.DataSource = null;
-                MyPlayList.DataBind();
             }
             else
             {
