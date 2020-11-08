@@ -170,7 +170,6 @@
             
             <asp:GridView ID="MyPlayList" runat="server" AutoGenerateColumns="False"
                 GridLines="Horizontal" BorderStyle="None"
-                DataSourceID="PlayListODS"
                 ItemType="ChinookSystem.VIEWMODELS.UserPlayListTrack" 
                 DataKeyNames="TrackID"
                 OnRowCommand="MyPlayList_RowCommand" >

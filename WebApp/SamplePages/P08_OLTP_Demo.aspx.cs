@@ -18,10 +18,25 @@ namespace WebApp.SamplePages
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            //throw new Exception("Page_Load, Hey Man");
+            //MessageUserControl.ShowInfo("", "ERROR: Hey Man");
             //TracksSelectionList.DataSource = null;
             MyPlayList.DataSourceID = "";
             MessageUserControl.ShowInfo("");
             UserName.Text = TextBoxUserName.Text;
+        }
+        protected void Page_PreRender(object sender, EventArgs e)
+        {
+            //throw new Exception("Page_Load, Hey Man");
+            if (!IsPostBack)
+            {
+                MessageUserControl.ShowInfo("", "ERROR: Hey Man");
+            }
+           
+            //TracksSelectionList.DataSource = null;
+            //MyPlayList.DataSourceID = "";
+            //MessageUserControl.ShowInfo("");
+            //UserName.Text = TextBoxUserName.Text;
         }
         #region TrackList Item Command and Building of the GridView
         protected void Tracks_Button_Command(Object sender, System.Web.UI.WebControls.CommandEventArgs e)
@@ -76,7 +91,7 @@ namespace WebApp.SamplePages
                         {
                             MessageUserControl.ShowInfo("", "MESSAGE: New PlayList");
                             ExistingIDOrNewName.Text = NewPlayListName.Text;
-                            MyPlayList.DataSourceID = "PlayListODS";
+                            //MyPlayList.DataSourceID = "PlayListODS";
                             MyPlayList.DataBind();
                         }
                         break;
@@ -91,11 +106,16 @@ namespace WebApp.SamplePages
                 UserPlayListTrack item = GetTrackFromTracksListToAddToPlayList(e.Item);
                 var playListItems = GetPlayListItemsFromGridView();
                 playListItems.Insert(0, item);
-                MyPlayList.DataSourceID = "";
-                MyPlayList.DataSource = playListItems;
-                MyPlayList.DataBind();
+                //MyPlayList.DataSourceID = "";
+                PopulateMyPlayList(playListItems);
                 e.Handled = true;
             }
+        }
+
+        private void PopulateMyPlayList(List<UserPlayListTrack> playListItems)
+        {
+            MyPlayList.DataSource = playListItems;
+            MyPlayList.DataBind();
         }
 
         UserPlayListTrack GetTrackFromTracksListToAddToPlayList(ListViewItem item)
