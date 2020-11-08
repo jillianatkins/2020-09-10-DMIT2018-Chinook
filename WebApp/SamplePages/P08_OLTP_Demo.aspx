@@ -3,76 +3,89 @@
 <%@ Register Src="~/UserControls/MessageUserControl.ascx" TagPrefix="uc1" TagName="MessageUserControl" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
-    <style> 
-        #TracksSelectionList > td
-    {
-      white-space: nowrap;
-    }
+    <style>
+        #TracksSelectionList > td {
+            white-space: nowrap;
+        }
     </style>
     <div class="row offset-1">
-        <h5>Manage Playlists (UI/UX TRX Sample)</h5>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <h5>Manage Playlists (UI/UX TRX Sample)</h5>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
         <uc1:MessageUserControl runat="server" ID="MessageUserControl" />
     </div>
     <div class="row">
         <div class="col-sm-2">
-            <asp:Label ID="Label1" runat="server" Text="Artist" ></asp:Label>&nbsp;&nbsp;
-            <asp:TextBox ID="ArtistName" runat="server" placeholder="artist name" 
+            <asp:Label ID="Label1" runat="server" Text="Artist"></asp:Label>&nbsp;&nbsp;
+            <asp:TextBox ID="ArtistName" runat="server" placeholder="artist name"
                 Width="100" AutoPostBack="False">
             </asp:TextBox>
-            <asp:Button ID="ArtistFetch" runat="server" Text="Fetch" 
-                OnCommand="Tracks_Button_Command" CommandName="Artist"/><br /><br />
+            <asp:Button ID="ArtistFetch" runat="server" Text="Fetch"
+                OnCommand="Tracks_Button_Command" CommandName="Artist" /><br />
+            <br />
 
             <asp:Label ID="Label2" runat="server" Text="Media"></asp:Label>
             <asp:DropDownList ID="MediaTypeDDL" runat="server" Width="100"
-                DataSourceID="MediaTypeDDLODS" 
-                DataTextField="DisplayText" 
+                DataSourceID="MediaTypeDDLODS"
+                DataTextField="DisplayText"
                 DataValueField="IDValueField">
             </asp:DropDownList>
-            <asp:Button ID="MediaTypeFetch" runat="server" Text="Fetch" 
-                 OnCommand="Tracks_Button_Command" CommandName="MediaType" /><br /><br />
+            <asp:Button ID="MediaTypeFetch" runat="server" Text="Fetch"
+                OnCommand="Tracks_Button_Command" CommandName="MediaType" /><br />
+            <br />
 
             <asp:Label ID="Label3" runat="server" Text="Genre"></asp:Label>
             <asp:DropDownList ID="GenreDDL" runat="server" Width="100"
-                DataSourceID="GenreDDLODS" 
-                DataTextField="DisplayText" 
+                DataSourceID="GenreDDLODS"
+                DataTextField="DisplayText"
                 DataValueField="IDValueField">
             </asp:DropDownList>
-            <asp:Button ID="GenreFetch" runat="server" Text="Fetch" 
-                OnCommand="Tracks_Button_Command" CommandName="Genre" /><br /><br />
+            <asp:Button ID="GenreFetch" runat="server" Text="Fetch"
+                OnCommand="Tracks_Button_Command" CommandName="Genre" /><br />
+            <br />
 
             <asp:Label ID="Label4" runat="server" Text="Album"></asp:Label>
-            <asp:TextBox ID="AlbumTitle" runat="server" placeholder="album title" 
+            <asp:TextBox ID="AlbumTitle" runat="server" placeholder="album title"
                 Width="100" AutoPostBack="False"></asp:TextBox>
-            <asp:Button ID="AlbumFetch" runat="server" Text="Fetch" 
-                OnCommand="Tracks_Button_Command" CommandName="Album" /><br /><br />
+            <asp:Button ID="AlbumFetch" runat="server" Text="Fetch"
+                OnCommand="Tracks_Button_Command" CommandName="Album" /><br />
+            <br />
+            <fieldset>
+                <legend>User Playlists
+                </legend>
+                <asp:Label ID="Label7" runat="server" Text="User Name"></asp:Label>
+                <asp:TextBox ID="TextBoxUserName" runat="server" Width="100"
+                    Text="RobbinLaw" AutoPostBack="True" OnTextChanged="CheckForValidUserName"></asp:TextBox>
+                <br />
+                <br />
 
-            <asp:Label ID="Label7" runat="server" Text="User Name"></asp:Label>
-            <asp:TextBox ID="TextBoxUserName" runat="server" Width="100" 
-                Text="RobbinLaw" AutoPostBack="True" OnTextChanged="CheckForValidUserName"></asp:TextBox>
-            <br /><br />
+                <asp:Label ID="Label5" runat="server" Text="Existing Playlist"></asp:Label>
+                <asp:DropDownList ID="ExistingPlayListDDL" runat="server" Width="100"
+                    DataSourceID="ExistingPlayListDDLODS"
+                    DataTextField="DisplayText"
+                    DataValueField="IDValueField">
+                </asp:DropDownList>
+                <asp:Button ID="ExistingPlayListButton" runat="server" Text="Fetch"
+                    OnCommand="PlayList_Buttons_Command" CommandName="Existing" /><br />
+                <br />
 
-            <asp:Label ID="Label5" runat="server" Text="Existing Playlist"></asp:Label>
-            <asp:DropDownList ID="ExistingPlayListDDL" runat="server" Width="100"
-                DataSourceID="ExistingPlayListDDLODS" 
-                DataTextField="DisplayText" 
-                DataValueField="IDValueField">
-            </asp:DropDownList>
-            <asp:Button ID="ExistingPlayListButton" runat="server" Text="Fetch" 
-                OnCommand="PlayList_Buttons_Command" CommandName="Existing" /><br /><br />
+                <asp:Label ID="Label6" runat="server" Text="New Playlist"></asp:Label>
+                <asp:TextBox ID="NewPlayListName" runat="server" Width="100"
+                    AutoPostBack="False"></asp:TextBox>
+                <asp:Button ID="NewPlayListButton" runat="server" Text="New"
+                    OnCommand="PlayList_Buttons_Command" CommandName="New" /><br />
+                <br />
+                <asp:Button ID="ButtonSavePlayList" runat="server" Text="Save PlayList"
+                    OnCommand="PlayList_Buttons_Command" CommandName="Save" /><br />
+                <br />
+            </fieldset>
 
-            <asp:Label ID="Label6" runat="server" Text="New Playlist"></asp:Label>
-            <asp:TextBox ID="NewPlayListName" runat="server" Width="100"
-                AutoPostBack="False" ></asp:TextBox>
-            <asp:Button ID="NewPlayListButton" runat="server" Text="New" 
-                OnCommand="PlayList_Buttons_Command" CommandName="New" /><br /><br />
 
-            <asp:Button ID="ButtonSavePlayList" runat="server" Text="Save PlayList" 
-                OnCommand="PlayList_Buttons_Command" CommandName="Save" /><br /><br />
+
         </div>
         <div class="col-sm-10">
             <asp:Panel ID="QueryPanel" runat="server" Visible="true">
-                <asp:Label ID="TracksBy" runat="server" ></asp:Label>&nbsp;&nbsp;
-                <asp:Label ID="SearchArg" runat="server" ></asp:Label>
+                <asp:Label ID="TracksBy" runat="server"></asp:Label>&nbsp;&nbsp;
+                <asp:Label ID="SearchArg" runat="server"></asp:Label>
             </asp:Panel>
             <asp:ListView ID="TracksSelectionList" runat="server"
                 ItemType="ChinookSystem.VIEWMODELS.TrackList"
@@ -82,24 +95,34 @@
                     <tr style="background-color: #FFFFFF; color: #284775;">
                         <td>
                             <asp:LinkButton ID="AddtoPlaylist" runat="server"
-                                CommandName="AddToMyPlayList" 
+                                CommandName="AddToMyPlayList"
                                 CommandArgument='<%# Item.TrackID %>'
                                 CssClass="btn">
                                 <i class="fa fa-plus" style="color:red;"></i>
                             </asp:LinkButton>
                         </td>
-                        <td><asp:Label Text="<%# Item.TrackID %>"  runat="server"  ID="TrackIDLabel" /></td>
-                        <td><asp:Label Text='<%# Item.Name %>' runat="server" ID="NameLabel" /></td>
-                        <td><asp:Label Text='<%# Item.Title %>' runat="server" ID="TitleLabel" /></td>
-                        <td><asp:Label Text='<%# Item.ArtistName %>' runat="server" ID="ArtistNameLabel" /></td>
-                        <td><asp:Label Text='<%# Item.MediaName %>' runat="server" ID="MediaNameLabel" /></td>
-                        <td><asp:Label Text='<%# Item.GenreName %>' runat="server" ID="GenreNameLabel" /></td>
-                        <td><asp:Label Text='<%# Item.Composer %>' runat="server" ID="ComposerLabel" /></td>
-                        <td><asp:Label Text='<%# Item.Milliseconds %>' 
-                            runat="server" ID="MillisecondsLabel" /></td>
-                        <td><asp:Label Text='<%# string.Format("{0:0}",(int)Item.Bytes / 1000000m) %>' 
-                            runat="server" ID="BytesLabel" /></td>
-                        <td><asp:Label Text='<%# Item.UnitPrice %>' runat="server" ID="UnitPriceLabel" /></td>
+                        <td>
+                            <asp:Label Text="<%# Item.TrackID %>" runat="server" ID="TrackIDLabel" /></td>
+                        <td>
+                            <asp:Label Text='<%# Item.Name %>' runat="server" ID="NameLabel" /></td>
+                        <td>
+                            <asp:Label Text='<%# Item.Title %>' runat="server" ID="TitleLabel" /></td>
+                        <td>
+                            <asp:Label Text='<%# Item.ArtistName %>' runat="server" ID="ArtistNameLabel" /></td>
+                        <td>
+                            <asp:Label Text='<%# Item.MediaName %>' runat="server" ID="MediaNameLabel" /></td>
+                        <td>
+                            <asp:Label Text='<%# Item.GenreName %>' runat="server" ID="GenreNameLabel" /></td>
+                        <td>
+                            <asp:Label Text='<%# Item.Composer %>' runat="server" ID="ComposerLabel" /></td>
+                        <td>
+                            <asp:Label Text='<%# Item.Milliseconds %>'
+                                runat="server" ID="MillisecondsLabel" /></td>
+                        <td>
+                            <asp:Label Text='<%# string.Format("{0:0}",(int)Item.Bytes / 1000000m) %>'
+                                runat="server" ID="BytesLabel" /></td>
+                        <td>
+                            <asp:Label Text='<%# Item.UnitPrice %>' runat="server" ID="UnitPriceLabel" /></td>
                     </tr>
                 </AlternatingItemTemplate>
                 <EmptyDataTemplate>
@@ -109,28 +132,38 @@
                         </tr>
                     </table>
                 </EmptyDataTemplate>
-                 <ItemTemplate>
+                <ItemTemplate>
                     <tr style="background-color: #E0FFFF; color: #333333;">
                         <td>
-                           <asp:LinkButton ID="AddtoPlaylist" runat="server"
-                               CommandName="AddToMyPlayList"
-                               CommandArgument='<%# Item.TrackID %>'
-                               CssClass="btn">
+                            <asp:LinkButton ID="AddtoPlaylist" runat="server"
+                                CommandName="AddToMyPlayList"
+                                CommandArgument='<%# Item.TrackID %>'
+                                CssClass="btn">
                                <i class="fa fa-plus" style="color:red;"></i>
                             </asp:LinkButton>
                         </td>
-                        <td><asp:Label Text="<%# Item.TrackID %>"  runat="server"  ID="TrackIDLabel"/></td>
-                        <td><asp:Label Text='<%# Item.Name %>' runat="server" ID="NameLabel" /></td>
-                        <td><asp:Label Text='<%# Item.Title %>' runat="server" ID="TitleLabel" /></td>
-                        <td><asp:Label Text='<%# Item.ArtistName %>' runat="server" ID="ArtistNameLabel" /></td>
-                        <td><asp:Label Text='<%# Item.MediaName %>' runat="server" ID="MediaNameLabel" /></td>
-                        <td><asp:Label Text='<%# Item.GenreName %>' runat="server" ID="GenreNameLabel" /></td>
-                        <td><asp:Label Text='<%# Item.Composer %>' runat="server" ID="ComposerLabel" /></td>
-                        <td><asp:Label Text='<%# Item.Milliseconds %>' 
-                            runat="server" ID="MillisecondsLabel" /></td>
-                        <td><asp:Label Text='<%# string.Format("{0:0}",(int)Item.Bytes / 1000000m) %>' 
-                            runat="server" ID="BytesLabel" /></td>
-                        <td><asp:Label Text='<%# Item.UnitPrice %>' runat="server" ID="UnitPriceLabel" /></td>
+                        <td>
+                            <asp:Label Text="<%# Item.TrackID %>" runat="server" ID="TrackIDLabel" /></td>
+                        <td>
+                            <asp:Label Text='<%# Item.Name %>' runat="server" ID="NameLabel" /></td>
+                        <td>
+                            <asp:Label Text='<%# Item.Title %>' runat="server" ID="TitleLabel" /></td>
+                        <td>
+                            <asp:Label Text='<%# Item.ArtistName %>' runat="server" ID="ArtistNameLabel" /></td>
+                        <td>
+                            <asp:Label Text='<%# Item.MediaName %>' runat="server" ID="MediaNameLabel" /></td>
+                        <td>
+                            <asp:Label Text='<%# Item.GenreName %>' runat="server" ID="GenreNameLabel" /></td>
+                        <td>
+                            <asp:Label Text='<%# Item.Composer %>' runat="server" ID="ComposerLabel" /></td>
+                        <td>
+                            <asp:Label Text='<%# Item.Milliseconds %>'
+                                runat="server" ID="MillisecondsLabel" /></td>
+                        <td>
+                            <asp:Label Text='<%# string.Format("{0:0}",(int)Item.Bytes / 1000000m) %>'
+                                runat="server" ID="BytesLabel" /></td>
+                        <td>
+                            <asp:Label Text='<%# Item.UnitPrice %>' runat="server" ID="UnitPriceLabel" /></td>
                     </tr>
                 </ItemTemplate>
                 <LayoutTemplate>
@@ -171,23 +204,23 @@
             </asp:ListView>
             <br />
             <asp:Panel ID="PanelPlayList" runat="server" Visible="true">
-                <asp:Label ID="UserName" runat="server" ></asp:Label>&nbsp;&nbsp;
-                <asp:Label ID="ExistingOrNew" runat="server" ></asp:Label>&nbsp;&nbsp;
-                <asp:Label ID="ExistingIDOrNewName" runat="server" ></asp:Label>
+                <asp:Label ID="UserName" runat="server"></asp:Label>&nbsp;&nbsp;
+                <asp:Label ID="ExistingOrNew" runat="server"></asp:Label>&nbsp;&nbsp;
+                <asp:Label ID="ExistingIDOrNewName" runat="server"></asp:Label>
             </asp:Panel>
-            
+
             <asp:GridView ID="MyPlayList" runat="server" AutoGenerateColumns="False"
                 GridLines="Horizontal" BorderStyle="None"
-                ItemType="ChinookSystem.VIEWMODELS.UserPlayListTrack" 
+                ItemType="ChinookSystem.VIEWMODELS.UserPlayListTrack"
                 DataKeyNames="TrackID"
-                OnRowCommand="MyPlayList_RowCommand" >
+                OnRowCommand="MyPlayList_RowCommand">
                 <Columns>
                     <asp:TemplateField>
-                        <ItemTemplate >
+                        <ItemTemplate>
                             <asp:LinkButton ID="DeleteFromPlaylist" runat="server"
                                 CommandName="DeleteFromMyPlayList"
                                 CommandArgument="<%# Container.DataItemIndex %>"
-                                CssClass="btn" >
+                                CssClass="btn">
                                 <i class="fa fa-times" style="color:red;"></i>&nbsp;
                             </asp:LinkButton>
                             <%--OnClientClick="return confirm('Are you sure you wish to remove the selected song(s)?')"--%>
@@ -200,13 +233,13 @@
                             <asp:LinkButton ID="MoveDown" runat="server"
                                 CommandName="MoveDownOnMyPlayList"
                                 CommandArgument="<%# Container.DataItemIndex %>"
-                                CssClass="btn"  >
+                                CssClass="btn">
                                 <i class="fa fa-chevron-down" style="color:blue;"></i>&nbsp;
                             </asp:LinkButton>
-                        </ItemTemplate>    
+                        </ItemTemplate>
                     </asp:TemplateField>
-                    <asp:TemplateField >
-                        <ItemTemplate >
+                    <asp:TemplateField>
+                        <ItemTemplate>
                             <asp:Label runat="server" ID="TrackId"
                                 Text='<%# Item.TrackID %>' Visible="false"></asp:Label>
                             &nbsp;&nbsp;
@@ -216,14 +249,14 @@
                         <ItemTemplate>
                             <asp:Label runat="server" ID="TrackNumber" Width="40px"
                                 Text='<%# Item.TrackNumber %>'></asp:Label>
-                              &nbsp;&nbsp;
+                            &nbsp;&nbsp;
                         </ItemTemplate>
                     </asp:TemplateField>
                     <asp:TemplateField HeaderText="Name">
                         <ItemTemplate>
                             <asp:Label runat="server" ID="TrackName"
                                 Text='<%# Item.TrackName %>'></asp:Label>
-                              &nbsp;&nbsp;
+                            &nbsp;&nbsp;
                         </ItemTemplate>
                     </asp:TemplateField>
                     <asp:TemplateField HeaderText="Time (m:s)">
@@ -231,70 +264,65 @@
                             <asp:Label runat="server" ID="Milliseconds" Width="80px"
                                 Text='<%# string.Format("{0:0}", (int)Item.Milliseconds/60000m)  %>'>
                             </asp:Label>
-                              &nbsp;&nbsp;
+                            &nbsp;&nbsp;
                         </ItemTemplate>
                     </asp:TemplateField>
                     <asp:TemplateField HeaderText="($)">
-                        <ItemTemplate> 
+                        <ItemTemplate>
                             <asp:Label runat="server" ID="UnitPrice"
                                 Text='<%# Item.UnitPrice %>'></asp:Label>
                         </ItemTemplate>
                     </asp:TemplateField>
                 </Columns>
                 <EmptyDataTemplate>
-                No data to view for the playlist.
+                    No data to view for the playlist.
                 </EmptyDataTemplate>
             </asp:GridView>
         </div>
     </div>
-    <asp:ObjectDataSource ID="MediaTypeDDLODS" runat="server" 
-        OldValuesParameterFormatString="original_{0}" 
-        SelectMethod="List_MediaTypeNames" 
+    <asp:ObjectDataSource ID="MediaTypeDDLODS" runat="server"
+        OldValuesParameterFormatString="original_{0}"
+        SelectMethod="List_MediaTypeNames"
         TypeName="ChinookSystem.BLL.MediaTypeController"
-         OnSelected="CheckForException">
-    </asp:ObjectDataSource>
-    <asp:ObjectDataSource ID="GenreDDLODS" runat="server" 
-        OldValuesParameterFormatString="original_{0}" 
-        SelectMethod="List_GenreNames" 
+        OnSelected="CheckForException"></asp:ObjectDataSource>
+    <asp:ObjectDataSource ID="GenreDDLODS" runat="server"
+        OldValuesParameterFormatString="original_{0}"
+        SelectMethod="List_GenreNames"
         TypeName="ChinookSystem.BLL.GenreController"
-         OnSelected="CheckForException">
-    </asp:ObjectDataSource>
-    <asp:ObjectDataSource ID="ExistingPlayListDDLODS" runat="server" 
-        OldValuesParameterFormatString="original_{0}" 
-        SelectMethod="GetPlayListForDDLByUserName" 
+        OnSelected="CheckForException"></asp:ObjectDataSource>
+    <asp:ObjectDataSource ID="ExistingPlayListDDLODS" runat="server"
+        OldValuesParameterFormatString="original_{0}"
+        SelectMethod="GetPlayListForDDLByUserName"
         TypeName="ChinookSystem.BLL.PlayListController"
-         OnSelected="CheckForException">
+        OnSelected="CheckForException">
         <SelectParameters>
             <asp:ControlParameter ControlID="TextBoxUserName"
                 PropertyName="Text" DefaultValue="none"
-                Name="userName" Type="String">
-            </asp:ControlParameter>
+                Name="userName" Type="String"></asp:ControlParameter>
         </SelectParameters>
     </asp:ObjectDataSource>
-    <asp:ObjectDataSource ID="TracksSelectionListODS" runat="server" 
-        OldValuesParameterFormatString="original_{0}" 
-        SelectMethod="List_TracksForPlaylistSelection" 
+    <asp:ObjectDataSource ID="TracksSelectionListODS" runat="server"
+        OldValuesParameterFormatString="original_{0}"
+        SelectMethod="List_TracksForPlaylistSelection"
         TypeName="ChinookSystem.BLL.TrackController"
-         OnSelected="CheckForException">
+        OnSelected="CheckForException">
         <SelectParameters>
             <asp:ControlParameter ControlID="TracksBy"
                 PropertyName="Text" DefaultValue="none"
-                Name="tracksby" Type="String">
-            </asp:ControlParameter>
-            <asp:ControlParameter ControlID="SearchArg" 
-                PropertyName="Text" DefaultValue="none" 
-                Name="arg" Type="String">
-            </asp:ControlParameter>
+                Name="tracksby" Type="String"></asp:ControlParameter>
+            <asp:ControlParameter ControlID="SearchArg"
+                PropertyName="Text" DefaultValue="none"
+                Name="arg" Type="String"></asp:ControlParameter>
         </SelectParameters>
     </asp:ObjectDataSource>
 
-    
 
-    <asp:ObjectDataSource ID="PlayListODS" runat="server" 
-        OldValuesParameterFormatString="original_{0}" 
-        SelectMethod="List_PlayList" 
+
+    <asp:ObjectDataSource ID="PlayListODS" runat="server"
+        OldValuesParameterFormatString="original_{0}"
+        SelectMethod="List_PlayList"
         TypeName="ChinookSystem.BLL.PlayListController"
-         OnSelected="CheckForException">
+        OnSelected="CheckForException">
         <SelectParameters>
             <asp:ControlParameter ControlID="UserName"
                 PropertyName="Text" DefaultValue="none"
@@ -302,8 +330,8 @@
             <asp:ControlParameter ControlID="ExistingOrNew"
                 PropertyName="Text" DefaultValue="none"
                 Name="existingOrNew" Type="String"></asp:ControlParameter>
-            <asp:ControlParameter ControlID="ExistingIDOrNewName" 
-                PropertyName="Text" DefaultValue="none" 
+            <asp:ControlParameter ControlID="ExistingIDOrNewName"
+                PropertyName="Text" DefaultValue="none"
                 Name="existingIDOrNewName" Type="String"></asp:ControlParameter>
         </SelectParameters>
     </asp:ObjectDataSource>
