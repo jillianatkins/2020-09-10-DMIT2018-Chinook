@@ -11,19 +11,47 @@ using ChinookSystem.BLL;
 using ChinookSystem.DAL;
 using ChinookSystem.VIEWMODELS;
 using ChinookSystem.ENTITIES;
+using Microsoft.Ajax.Utilities;
 #endregion
 
 namespace WebApp.SamplePages
 {
     public partial class P08_OLTP_Demo : System.Web.UI.Page
     {
+        bool userNameIsValid;
         protected void Page_Load(object sender, EventArgs e)
         {
             
-            MessageUserControl.ShowInfo("");
-           
+            MessageUserControl.ShowInfo("Hey Man");
+            ArtistName.Attributes.Add("onkeydown", "return (event.keyCode!=13);");
+            AlbumTitle.Attributes.Add("onkeydown", "return (event.keyCode!=13);");
+            TextBoxUserName.Attributes.Add("onkeydown", "return (event.keyCode!=13);");
+            NewPlayListName.Attributes.Add("onkeydown", "return (event.keyCode!=13);");
+
         }
-        
+        protected void CheckForValidUserName(object sender, EventArgs e)
+        {
+            var userNameIsValid = UserNameCheck();
+            if (userNameIsValid == false)
+            {
+                MessageUserControl.ShowInfo("", "ERROR: User Name is NOT VALID");
+                MyPlayList.DataSource = null;
+                MyPlayList.DataBind();
+            }
+            else
+            {
+                ExistingPlayListDDL.DataBind();
+            }
+
+        }
+
+        private bool UserNameCheck()
+        {
+            PlayListController sysmgr = new PlayListController();
+            var userNameIsValid = sysmgr.UserNameIsValid(TextBoxUserName.Text);
+            return userNameIsValid;
+        }
+
         #region TrackList Item Command and Building of the GridView
         protected void Tracks_Button_Command(Object sender, System.Web.UI.WebControls.CommandEventArgs e)
         {
@@ -54,9 +82,12 @@ namespace WebApp.SamplePages
 
         protected void PlayList_Buttons_Command(Object sender, System.Web.UI.WebControls.CommandEventArgs e)
         {
-            if (string.IsNullOrEmpty(TextBoxUserName.Text))
+            var userNameIsValid = UserNameCheck();
+            if (userNameIsValid == false)
             {
-                MessageUserControl.ShowInfo("", "ERROR: Give a User Name.");
+                MessageUserControl.ShowInfo("", "ERROR: (PlayList_Buttons) User Name is NOT VALID");
+                MyPlayList.DataSource = null;
+                MyPlayList.DataBind();
             }
             else
             {
@@ -84,7 +115,13 @@ namespace WebApp.SamplePages
                             MessageUserControl.ShowInfo("", "ERROR: Give a new PlayList name.");
                         else
                         {
-                            MessageUserControl.ShowInfo("", "MESSAGE: New PlayList, NOT IMPLEMENTED");
+                            MessageUserControl.TryRun(() => {
+                                PlayListController sysmgr = new PlayListController();
+                                sysmgr.AddNewPLaylist(NewPlayListName.Text, TextBoxUserName.Text);
+                                ExistingPlayListDDL.DataBind();
+                                //MyPlayList.DataSource = info;
+                                //MyPlayList.DataBind();
+                            }, "", "SUCCESS: New PlayList Added");
                         }
                         break;
                     case ("Save"):
@@ -97,7 +134,7 @@ namespace WebApp.SamplePages
                         }, "", "SUCCESS: PlayList Saved");
                         break;
                 }
-            }  
+            }   
         }
 
         protected void TracksSelectionList_ItemCommand(object sender, ListViewCommandEventArgs e)

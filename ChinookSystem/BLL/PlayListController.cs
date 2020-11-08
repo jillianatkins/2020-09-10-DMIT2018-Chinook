@@ -18,6 +18,26 @@ namespace ChinookSystem.BLL
 	[DataObject]
 	public class PlayListController
 	{
+		[DataObjectMethod(DataObjectMethodType.Select, false)]
+		public bool UserNameIsValid(string playlistusername)
+		{
+			using (var context = new ChinookSystemContext())
+			{
+				Playlist exists = (from x in context.Playlists
+								   where x.UserName.Equals(playlistusername)
+								   select x).FirstOrDefault();
+				if (exists == null)
+				{
+					return false;
+				}
+                else
+                {
+					return true;
+                }
+			}
+		}
+
+				
 		#region OLTP Demo
 		[DataObjectMethod(DataObjectMethodType.Select, false)]
 		public List<UserPlayListTrack> ListExistingPlayList(string existingPlayListID)
@@ -25,7 +45,8 @@ namespace ChinookSystem.BLL
 			using (var context = new ChinookSystemContext())
 			{
 				IEnumerable<UserPlayListTrack> results = null;
-	
+				if(existingPlayListID != "")
+                {
 					int narg = int.Parse(existingPlayListID);
 					results = from x in context.PlaylistTracks
 							  where x.PlaylistId == narg
@@ -39,6 +60,11 @@ namespace ChinookSystem.BLL
 								  UnitPrice = x.Track.UnitPrice
 							  };
 					return results.ToList();
+				}
+                else
+                {
+					return null;
+                }
 			}
 		}
 		
@@ -69,10 +95,6 @@ namespace ChinookSystem.BLL
 								   select x).FirstOrDefault();
 				if (exists == null)
 				{
-					//exists = new Playlist();
-					//exists.Name = playlistname;
-					//exists.UserName = username;
-
 					exists = new Playlist()
 					{
 						//pkey is an identity int key
@@ -80,10 +102,11 @@ namespace ChinookSystem.BLL
 						UserName = username
 					};
 					context.Playlists.Add(exists);
-					//tracknumber = 1;
+					context.SaveChanges();
 				}
 				else
 				{
+					throw new Exception("ERROR: PlayList Already Exists for this User");
 				}
 			}
 		}
@@ -91,7 +114,7 @@ namespace ChinookSystem.BLL
 		{
 			using (var context = new ChinookSystemContext())
 			{
-				throw new Exception("ERROR: SavePlayList NOT IMPLEMENTED");
+				throw new Exception("MESSAGE: SavePlayList NOT IMPLEMENTED");
 			}
 		}
 		#endregion

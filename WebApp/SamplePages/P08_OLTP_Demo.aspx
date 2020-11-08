@@ -16,7 +16,9 @@
     <div class="row">
         <div class="col-sm-2">
             <asp:Label ID="Label1" runat="server" Text="Artist" ></asp:Label>&nbsp;&nbsp;
-            <asp:TextBox ID="ArtistName" runat="server" placeholder="artist name" Width="100"></asp:TextBox>
+            <asp:TextBox ID="ArtistName" runat="server" placeholder="artist name" 
+                Width="100" AutoPostBack="False">
+            </asp:TextBox>
             <asp:Button ID="ArtistFetch" runat="server" Text="Fetch" 
                 OnCommand="Tracks_Button_Command" CommandName="Artist"/><br /><br />
 
@@ -39,12 +41,14 @@
                 OnCommand="Tracks_Button_Command" CommandName="Genre" /><br /><br />
 
             <asp:Label ID="Label4" runat="server" Text="Album"></asp:Label>
-            <asp:TextBox ID="AlbumTitle" runat="server" placeholder="album title" Width="100"></asp:TextBox>
+            <asp:TextBox ID="AlbumTitle" runat="server" placeholder="album title" 
+                Width="100" AutoPostBack="False"></asp:TextBox>
             <asp:Button ID="AlbumFetch" runat="server" Text="Fetch" 
                 OnCommand="Tracks_Button_Command" CommandName="Album" /><br /><br />
 
             <asp:Label ID="Label7" runat="server" Text="User Name"></asp:Label>
-            <asp:TextBox ID="TextBoxUserName" runat="server" Width="100" Text="RobbinLaw"></asp:TextBox>
+            <asp:TextBox ID="TextBoxUserName" runat="server" Width="100" 
+                Text="RobbinLaw" AutoPostBack="True" OnTextChanged="CheckForValidUserName"></asp:TextBox>
             <br /><br />
 
             <asp:Label ID="Label5" runat="server" Text="Existing Playlist"></asp:Label>
@@ -57,7 +61,8 @@
                 OnCommand="PlayList_Buttons_Command" CommandName="Existing" /><br /><br />
 
             <asp:Label ID="Label6" runat="server" Text="New Playlist"></asp:Label>
-            <asp:TextBox ID="NewPlayListName" runat="server" Width="100"></asp:TextBox>
+            <asp:TextBox ID="NewPlayListName" runat="server" Width="100"
+                AutoPostBack="False" ></asp:TextBox>
             <asp:Button ID="NewPlayListButton" runat="server" Text="New" 
                 OnCommand="PlayList_Buttons_Command" CommandName="New" /><br /><br />
 
