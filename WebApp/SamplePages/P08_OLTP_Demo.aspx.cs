@@ -115,8 +115,6 @@ namespace WebApp.SamplePages
                                 ExistingPlayListDDL.SelectedValue = id.ToString();
                                 MyPlayList.DataSource = null;
                                 MyPlayList.DataBind();
-                                //MyPlayList.DataSource = info;
-                                //MyPlayList.DataBind();
                             }, "", "SUCCESS: New PlayList Added");
                         }
                         break;
@@ -125,8 +123,6 @@ namespace WebApp.SamplePages
                         MessageUserControl.TryRun(() => {
                             PlayListController sysmgr = new PlayListController();
                             sysmgr.SavePlayList(playListItems);
-                            //MyPlayList.DataSource = info;
-                            //MyPlayList.DataBind();
                         }, "", "SUCCESS: PlayList Saved");
                         break;
                 }
