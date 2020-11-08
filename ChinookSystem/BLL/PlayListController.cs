@@ -18,6 +18,7 @@ namespace ChinookSystem.BLL
 	[DataObject]
 	public class PlayListController
 	{
+		#region OLTP Demo
 		[DataObjectMethod(DataObjectMethodType.Select, false)]
 		public bool UserNameIsValid(string playlistusername)
 		{
@@ -38,7 +39,7 @@ namespace ChinookSystem.BLL
 		}
 
 				
-		#region OLTP Demo
+		
 		[DataObjectMethod(DataObjectMethodType.Select, false)]
 		public List<UserPlayListTrack> ListExistingPlayList(string existingPlayListID)
 		{
@@ -85,7 +86,7 @@ namespace ChinookSystem.BLL
 			}
 		}
 
-		public void AddNewPLaylist(string playlistname, string username)
+		public int AddNewPLaylist(string playlistname, string username)
 		{
 			using (var context = new ChinookSystemContext())
 			{
@@ -103,6 +104,7 @@ namespace ChinookSystem.BLL
 					};
 					context.Playlists.Add(exists);
 					context.SaveChanges();
+					return exists.PlaylistId;
 				}
 				else
 				{

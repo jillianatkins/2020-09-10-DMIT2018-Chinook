@@ -110,8 +110,11 @@ namespace WebApp.SamplePages
                         {
                             MessageUserControl.TryRun(() => {
                                 PlayListController sysmgr = new PlayListController();
-                                sysmgr.AddNewPLaylist(NewPlayListName.Text, TextBoxUserName.Text);
+                                int id = sysmgr.AddNewPLaylist(NewPlayListName.Text, TextBoxUserName.Text);
                                 ExistingPlayListDDL.DataBind();
+                                ExistingPlayListDDL.SelectedValue = id.ToString();
+                                MyPlayList.DataSource = null;
+                                MyPlayList.DataBind();
                                 //MyPlayList.DataSource = info;
                                 //MyPlayList.DataBind();
                             }, "", "SUCCESS: New PlayList Added");
