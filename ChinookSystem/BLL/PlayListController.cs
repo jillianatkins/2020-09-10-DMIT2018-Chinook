@@ -20,7 +20,7 @@ namespace ChinookSystem.BLL
 	{
 		#region Query for OLTP Demo PlayList for GridView
 		[DataObjectMethod(DataObjectMethodType.Select, false)]
-		public List<UserPlayListTrack> List_PlayList(string existingOrNew, string existingIDOrNewName)
+		public List<UserPlayListTrack> List_PlayList(string userName, string existingOrNew, string existingIDOrNewName)
 		{
 			using (var context = new ChinookSystemContext())
 			{
@@ -43,6 +43,28 @@ namespace ChinookSystem.BLL
 				}
 				else if (existingOrNew.Equals("New"))
 				{
+					//Playlist exists = (from x in context.Playlists
+					//				   where x.Name.Equals(playlistname)
+					//					&& x.UserName.Equals(username)
+					//				   select x).FirstOrDefault();
+					//if (exists == null)
+					//{
+					//	//exists = new Playlist();
+					//	//exists.Name = playlistname;
+					//	//exists.UserName = username;
+
+					//	exists = new Playlist()
+					//	{
+					//		//pkey is an identity int key
+					//		Name = playlistname,
+					//		UserName = username
+					//	};
+					//	context.Playlists.Add(exists);
+					//	tracknumber = 1;
+					//}
+					//else
+					//{
+					//}
 					throw new Exception("PlayListController, List_PlayList, (New) NOT implemented yet");
 				}
 
@@ -56,15 +78,15 @@ namespace ChinookSystem.BLL
 				}
 			}
 		}
-				#endregion
+		#endregion
 
-				#region Query for OLTP Demo Existing PlayList DDL
-				[DataObjectMethod(DataObjectMethodType.Select, false)]
-		public List<SelectionList> GetPlayListForDDLByUserName()
+		#region Query for OLTP Demo Existing PlayList DDL
+		[DataObjectMethod(DataObjectMethodType.Select, false)]
+		public List<SelectionList> GetPlayListForDDLByUserName(string userName)
 		{
 			using (var context = new ChinookSystemContext())
 			{
-				var userName = "RobbinLaw";
+				//var userName = "RobbinLaw";
 				var results = from x in context.Playlists
 							  where x.UserName == userName
 							  select new SelectionList
@@ -102,6 +124,35 @@ namespace ChinookSystem.BLL
 				return results.ToList();
 			}
 		}
-        #endregion
-    }
+		#endregion
+
+		public void Add_PLaylist(string playlistname, string username)
+		{
+			using (var context = new ChinookSystemContext())
+			{
+				Playlist exists = (from x in context.Playlists
+								   where x.Name.Equals(playlistname)
+									&& x.UserName.Equals(username)
+								   select x).FirstOrDefault();
+				if (exists == null)
+				{
+					//exists = new Playlist();
+					//exists.Name = playlistname;
+					//exists.UserName = username;
+
+					exists = new Playlist()
+					{
+						//pkey is an identity int key
+						Name = playlistname,
+						UserName = username
+					};
+					context.Playlists.Add(exists);
+					//tracknumber = 1;
+				}
+				else
+				{
+				}
+			}
+		}
+	}
 }

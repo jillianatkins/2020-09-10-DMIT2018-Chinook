@@ -18,8 +18,10 @@ namespace WebApp.SamplePages
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            TracksSelectionList.DataSource = null;
+            //TracksSelectionList.DataSource = null;
+            MyPlayList.DataSourceID = "";
             MessageUserControl.ShowInfo("");
+            UserName.Text = TextBoxUserName.Text;
         }
         #region TrackList Item Command and Building of the GridView
         protected void Tracks_Button_Command(Object sender, System.Web.UI.WebControls.CommandEventArgs e)
@@ -49,27 +51,37 @@ namespace WebApp.SamplePages
             TracksSelectionList.DataBind();
         }
 
-        protected void PlayList_Button_Command(Object sender, System.Web.UI.WebControls.CommandEventArgs e)
+        protected void PlayList_Buttons_Command(Object sender, System.Web.UI.WebControls.CommandEventArgs e)
         {
-            ExistingOrNew.Text = e.CommandName;
-            switch (e.CommandName)
+            if (string.IsNullOrEmpty(TextBoxUserName.Text))
             {
-                case ("Existing"):
-                    MessageUserControl.ShowInfo("", "MESSAGE: Existing PlayList");
-                    ExistingIDOrNewName.Text = ExistingPlayListDDL.SelectedValue;
-                    MyPlayList.DataSourceID = "PlayListODS";
-                    break;
-                case ("New"):
-                    if (string.IsNullOrEmpty(NewPlayListName.Text))
-                        MessageUserControl.ShowInfo("", "ERROR: Give a new PlayList name.");
-                    else
-                    {
-                        MessageUserControl.ShowInfo("", "MESSAGE: New PlayList");
-                        ExistingIDOrNewName.Text = NewPlayListName.Text;
-                    }
-                    break;
+                MessageUserControl.ShowInfo("", "ERROR: Give a User Name.");
             }
-            MyPlayList.DataBind();
+            else
+            {
+                ExistingOrNew.Text = e.CommandName;
+                switch (e.CommandName)
+                {
+                    case ("Existing"):
+                        MessageUserControl.ShowInfo("", "MESSAGE: Existing PlayList");
+                        UserName.Text = TextBoxUserName.Text;
+                        ExistingIDOrNewName.Text = ExistingPlayListDDL.SelectedValue;
+                        MyPlayList.DataSourceID = "PlayListODS";
+                        MyPlayList.DataBind();
+                        break;
+                    case ("New"):
+                        if (string.IsNullOrEmpty(NewPlayListName.Text))
+                            MessageUserControl.ShowInfo("", "ERROR: Give a new PlayList name.");
+                        else
+                        {
+                            MessageUserControl.ShowInfo("", "MESSAGE: New PlayList");
+                            ExistingIDOrNewName.Text = NewPlayListName.Text;
+                            MyPlayList.DataSourceID = "PlayListODS";
+                            MyPlayList.DataBind();
+                        }
+                        break;
+                }
+            }  
         }
 
         protected void TracksSelectionList_ItemCommand(object sender, ListViewCommandEventArgs e)

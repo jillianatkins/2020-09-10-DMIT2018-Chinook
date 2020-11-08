@@ -43,6 +43,10 @@
             <asp:Button ID="AlbumFetch" runat="server" Text="Fetch" 
                 OnCommand="Tracks_Button_Command" CommandName="Album" /><br /><br />
 
+            <asp:Label ID="Label7" runat="server" Text="User Name"></asp:Label>
+            <asp:TextBox ID="TextBoxUserName" runat="server" Width="100" Text="RobbinLaw"></asp:TextBox>
+            <br /><br />
+
             <asp:Label ID="Label5" runat="server" Text="Existing Playlist"></asp:Label>
             <asp:DropDownList ID="ExistingPlayListDDL" runat="server" Width="100"
                 DataSourceID="ExistingPlayListDDLODS" 
@@ -50,12 +54,12 @@
                 DataValueField="IDValueField">
             </asp:DropDownList>
             <asp:Button ID="ExistingPlayListButton" runat="server" Text="Fetch" 
-                OnCommand="PlayList_Button_Command" CommandName="Existing" /><br /><br />
+                OnCommand="PlayList_Buttons_Command" CommandName="Existing" /><br /><br />
 
             <asp:Label ID="Label6" runat="server" Text="New Playlist"></asp:Label>
             <asp:TextBox ID="NewPlayListName" runat="server" Width="100"></asp:TextBox>
             <asp:Button ID="NewPlayListButton" runat="server" Text="New" 
-                OnCommand="PlayList_Button_Command" CommandName="New" /><br /><br />
+                OnCommand="PlayList_Buttons_Command" CommandName="New" /><br /><br />
         </div>
         <div class="col-sm-10">
             <asp:Panel ID="QueryPanel" runat="server" Visible="true">
@@ -159,6 +163,7 @@
             </asp:ListView>
             <br />
             <asp:Panel ID="PanelPlayList" runat="server" Visible="true">
+                <asp:Label ID="UserName" runat="server" ></asp:Label>&nbsp;&nbsp;
                 <asp:Label ID="ExistingOrNew" runat="server" ></asp:Label>&nbsp;&nbsp;
                 <asp:Label ID="ExistingIDOrNewName" runat="server" ></asp:Label>
             </asp:Panel>
@@ -252,6 +257,12 @@
         SelectMethod="GetPlayListForDDLByUserName" 
         TypeName="ChinookSystem.BLL.PlayListController"
          OnSelected="CheckForException">
+        <SelectParameters>
+            <asp:ControlParameter ControlID="UserName"
+                PropertyName="Text" DefaultValue="none"
+                Name="userName" Type="String">
+            </asp:ControlParameter>
+        </SelectParameters>
     </asp:ObjectDataSource>
     <asp:ObjectDataSource ID="TracksSelectionListODS" runat="server" 
         OldValuesParameterFormatString="original_{0}" 
@@ -261,10 +272,12 @@
         <SelectParameters>
             <asp:ControlParameter ControlID="TracksBy"
                 PropertyName="Text" DefaultValue="none"
-                Name="tracksby" Type="String"></asp:ControlParameter>
+                Name="tracksby" Type="String">
+            </asp:ControlParameter>
             <asp:ControlParameter ControlID="SearchArg" 
                 PropertyName="Text" DefaultValue="none" 
-                Name="arg" Type="String"></asp:ControlParameter>
+                Name="arg" Type="String">
+            </asp:ControlParameter>
         </SelectParameters>
     </asp:ObjectDataSource>
 
@@ -276,6 +289,9 @@
         TypeName="ChinookSystem.BLL.PlayListController"
          OnSelected="CheckForException">
         <SelectParameters>
+            <asp:ControlParameter ControlID="UserName"
+                PropertyName="Text" DefaultValue="none"
+                Name="userName" Type="String"></asp:ControlParameter>
             <asp:ControlParameter ControlID="ExistingOrNew"
                 PropertyName="Text" DefaultValue="none"
                 Name="existingOrNew" Type="String"></asp:ControlParameter>
