@@ -187,7 +187,7 @@ namespace WebApp.SamplePages
                     rowIndex.ToString());
                 playListItems.Remove(playListItem);
                 resetPlayListTrackNumbers(playListItems);
-                MyPlayList.DataSourceID = "";
+                //MyPlayList.DataSourceID = "";
                 MyPlayList.DataSource = playListItems;
                 MyPlayList.DataBind();
                 e.Handled = true;
@@ -202,7 +202,7 @@ namespace WebApp.SamplePages
                     playListItems.Remove(playListItem);
                     playListItems.Insert(rowIndex - 1, playListItem);
                     resetPlayListTrackNumbers(playListItems);
-                    MyPlayList.DataSourceID = "";
+                    //MyPlayList.DataSourceID = "";
                     MyPlayList.DataSource = playListItems;
                     MyPlayList.DataBind();
                 }
@@ -217,7 +217,7 @@ namespace WebApp.SamplePages
                     playListItems.Remove(playListItem);
                     playListItems.Insert(rowIndex + 1, playListItem);
                     resetPlayListTrackNumbers(playListItems);
-                    MyPlayList.DataSourceID = "";
+                    //MyPlayList.DataSourceID = "";
                     MyPlayList.DataSource = playListItems;
                     MyPlayList.DataBind();
                 }
