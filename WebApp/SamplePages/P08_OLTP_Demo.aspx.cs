@@ -122,7 +122,7 @@ namespace WebApp.SamplePages
                         var playListItems = GetPlayListItemsFromGridView();
                         MessageUserControl.TryRun(() => {
                             PlayListController sysmgr = new PlayListController();
-                            sysmgr.SavePlayList(playListItems);
+                            sysmgr.SavePlayList(ExistingPlayListDDL.SelectedValue.ToInt(), playListItems);
                         }, "", "SUCCESS: PlayList Saved");
                         break;
                 }

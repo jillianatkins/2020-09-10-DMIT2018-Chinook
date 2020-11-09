@@ -112,11 +112,23 @@ namespace ChinookSystem.BLL
 				}
 			}
 		}
-		public void SavePlayList(List<UserPlayListTrack> playList)
+		public void SavePlayList(int playlistid, List<UserPlayListTrack> playlist)
 		{
 			using (var context = new ChinookSystemContext())
 			{
-				throw new Exception("MESSAGE: SavePlayList NOT IMPLEMENTED");
+				throw new Exception("MESSAGE: SavePlayList with playlistid=" + playlistid 
+					+ " and first trackid=" + playlist[0].TrackID
+					);
+
+				//foreach (var track in playList)
+				//{
+				//	PlaylistTrack results2 = (from x in context.PlaylistTracks
+				//							  where x.PlaylistId == playlistid
+				//							  && x.TrackId == track.TrackID
+				//							  orderby x.TrackNumber
+				//							  select x).FirstOrDefault();
+				//}
+					
 			}
 		}
 		#endregion
