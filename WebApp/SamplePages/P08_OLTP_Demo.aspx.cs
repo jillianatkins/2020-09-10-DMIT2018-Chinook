@@ -25,6 +25,7 @@ namespace WebApp.SamplePages
             TextBoxUserName.Attributes.Add("onkeydown", "return (event.keyCode!=13);");
             NewPlayListName.Attributes.Add("onkeydown", "return (event.keyCode!=13);");
         }
+        #region UserNameCheck
         protected void CheckForValidUserName(object sender, EventArgs e)
         {
             var userNameIsValid = UserNameCheck();
@@ -75,6 +76,53 @@ namespace WebApp.SamplePages
             TracksSelectionList.DataBind();
         }
 
+        protected void TracksSelectionList_ItemCommand(object sender, ListViewCommandEventArgs e)
+        {
+            if (e.CommandName == "AddToMyPlayList")
+            {
+                UserPlayListTrack item = GetTrackFromTracksListToAddToPlayList(e.Item);
+                var playListItems = GetPlayListItemsFromGridView();
+                playListItems.Insert(0, item);
+                MyPlayList.DataSource = playListItems;
+                MyPlayList.DataBind();
+                e.Handled = true;
+            }
+        }
+
+        UserPlayListTrack GetTrackFromTracksListToAddToPlayList(ListViewItem item)
+        {
+            var track = new UserPlayListTrack
+            {
+                TrackID = item.FindLabel("TrackIDLabel").Text.ToInt(),
+                TrackNumber = 1,
+                TrackName = item.FindLabel("NameLabel").Text,
+                Milliseconds = item.FindLabel("MillisecondsLabel").Text.ToInt(),
+                UnitPrice = item.FindLabel("UnitPriceLabel").Text.ToDecimal()
+            };
+            return track;
+        }
+        List<UserPlayListTrack> GetPlayListItemsFromGridView()
+        {
+            var list = new List<UserPlayListTrack>();
+            int trackNumber = 2;
+            foreach (GridViewRow row in MyPlayList.Rows)
+            {
+                var item = new UserPlayListTrack
+                {
+                    TrackID = row.FindLabel("TrackId").Text.ToInt(),
+                    TrackNumber = trackNumber,
+                    TrackName = row.FindLabel("TrackName").Text,
+                    Milliseconds = row.FindLabel("Milliseconds").Text.ToInt(),
+                    UnitPrice = row.FindLabel("UnitPrice").Text.ToDecimal()
+                };
+                list.Add(item);
+                trackNumber++;
+            }
+            return list;
+        }
+        #endregion
+
+        #region PlayList Item Command
         protected void PlayList_Buttons_Command(Object sender, System.Web.UI.WebControls.CommandEventArgs e)
         {
             var userNameIsValid = UserNameCheck();
@@ -126,52 +174,7 @@ namespace WebApp.SamplePages
                         }, "", "SUCCESS: PlayList Saved");
                         break;
                 }
-            }   
-        }
-
-        protected void TracksSelectionList_ItemCommand(object sender, ListViewCommandEventArgs e)
-        {
-            if (e.CommandName == "AddToMyPlayList")
-            {
-                UserPlayListTrack item = GetTrackFromTracksListToAddToPlayList(e.Item);
-                var playListItems = GetPlayListItemsFromGridView();
-                playListItems.Insert(0, item);
-                MyPlayList.DataSource = playListItems;
-                MyPlayList.DataBind();
-                e.Handled = true;
             }
-        }
-
-        UserPlayListTrack GetTrackFromTracksListToAddToPlayList(ListViewItem item)
-        {
-            var track = new UserPlayListTrack
-            {
-                TrackID = item.FindLabel("TrackIDLabel").Text.ToInt(),
-                TrackNumber = 1,
-                TrackName = item.FindLabel("NameLabel").Text,
-                Milliseconds = item.FindLabel("MillisecondsLabel").Text.ToInt(),
-                UnitPrice = item.FindLabel("UnitPriceLabel").Text.ToDecimal()
-            };
-            return track;
-        }
-        List<UserPlayListTrack> GetPlayListItemsFromGridView()
-        {
-            var list = new List<UserPlayListTrack>();
-            int trackNumber = 2;
-            foreach (GridViewRow row in MyPlayList.Rows)
-            {
-                var item = new UserPlayListTrack
-                {
-                    TrackID = row.FindLabel("TrackId").Text.ToInt(),
-                    TrackNumber = trackNumber,
-                    TrackName = row.FindLabel("TrackName").Text,
-                    Milliseconds = row.FindLabel("Milliseconds").Text.ToInt(),
-                    UnitPrice = row.FindLabel("UnitPrice").Text.ToDecimal()
-                };
-                list.Add(item);
-                trackNumber++;
-            }
-            return list;
         }
         #endregion
 
