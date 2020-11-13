@@ -47,6 +47,7 @@ namespace WebApp.SamplePages
             var userNameIsValid = sysmgr.UserNameIsValid(TextBoxUserName.Text);
             return userNameIsValid;
         }
+        #endregion
 
         #region TrackList Item Command and Building of the GridView
         protected void Tracks_Button_Command(Object sender, System.Web.UI.WebControls.CommandEventArgs e)
