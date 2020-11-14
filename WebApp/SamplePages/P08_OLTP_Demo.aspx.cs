@@ -25,6 +25,7 @@ namespace WebApp.SamplePages
             TextBoxUserName.Attributes.Add("onkeydown", "return (event.keyCode!=13);");
             NewPlayListName.Attributes.Add("onkeydown", "return (event.keyCode!=13);");
         }
+
         #region UserNameCheck
         protected void CheckForValidUserName(object sender, EventArgs e)
         {
