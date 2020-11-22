@@ -145,16 +145,27 @@ namespace WebApp.SamplePages
         #region PlaylistDropDown
         protected void PlaylistDropDown_SelectedIndexChanged(object sender, EventArgs e)
         {
+            //how do we do error handling using MessageUserControl if the
+            //   code executing is NOT part of an ODS
+            //you could use Try/Catch (BUT WE WON'T)
+            //if you examine the source code of MessageUserControl, you will
+            //  find embedded within the code the Try/Catch
+            //the syntax:
+            //  MessageUserControl.TryRun( () => {coding block});
+            //  MessageUserControl.TryRun( () => {coding block},"success title","successmessage");
             MessageUserControl.TryRun(() => {
                 PlayListController sysmgr = new PlayListController();
                 List<UserPlayListTrack> info = sysmgr.ListExistingPlayList
                     (ExistingPlayListDDL.SelectedValue);
                 MyPlayList.DataSource = info;
                 MyPlayList.DataBind();
+                ButtonSavePlayList.Text = "Save (Playlist # " + ExistingPlayListDDL.SelectedValue + ")";
             }, "", "SUCCESS: PlayList Retrieved");
+            NewPlayListName.Visible = false;
+
         }
         #endregion
-        #region PlayList Item Command
+        #region PlayList Item Command New and Save buttons
         protected void PlayList_Buttons_Command(Object sender, System.Web.UI.WebControls.CommandEventArgs e)
         {
             var userNameIsValid = UserNameCheck();
@@ -166,44 +177,43 @@ namespace WebApp.SamplePages
             {
                 switch (e.CommandName)
                 {
-                    case ("Existing"):
-                        //how do we do error handling using MessageUserControl if the
-                        //   code executing is NOT part of an ODS
-                        //you could use Try/Catch (BUT WE WON'T)
-                        //if you examine the source code of MessageUserControl, you will
-                        //  find embedded within the code the Try/Catch
-                        //the syntax:
-                        //  MessageUserControl.TryRun( () => {coding block});
-                        //  MessageUserControl.TryRun( () => {coding block},"success title","successmessage");
-                        MessageUserControl.TryRun(() => {
-                            PlayListController sysmgr = new PlayListController();
-                            List<UserPlayListTrack> info = sysmgr.ListExistingPlayList
-                                (ExistingPlayListDDL.SelectedValue);
-                            MyPlayList.DataSource = info;
-                            MyPlayList.DataBind();
-                        }, "", "SUCCESS: PlayList Retrieved");
-                        break;
                     case ("New"):
-                        if (string.IsNullOrEmpty(NewPlayListName.Text))
-                            MessageUserControl.ShowInfo("", "ERROR: Give a new PlayList name.");
-                        else
-                        {
-                            MessageUserControl.TryRun(() => {
-                                PlayListController sysmgr = new PlayListController();
-                                int id = sysmgr.AddNewPLaylist(NewPlayListName.Text, TextBoxUserName.Text);
-                                ExistingPlayListDDL.DataBind();
-                                ExistingPlayListDDL.SelectedValue = id.ToString();
-                                MyPlayList.DataSource = null;
-                                MyPlayList.DataBind();
-                            }, "", "SUCCESS: New PlayList Added");
-                        }
+                        ButtonSavePlayList.Text = "Save (New Playlist)";
+                        MyPlayList.DataSource = null;
+                        MyPlayList.DataBind();
+                        NewPlayListName.Visible = true;
+                        //if (string.IsNullOrEmpty(NewPlayListName.Text))
+                        //    MessageUserControl.ShowInfo("", "ERROR: Give a new PlayList name.");
+                        //else
+                        //{
+                        //    MessageUserControl.TryRun(() => {
+                        //        PlayListController sysmgr = new PlayListController();
+                        //        int id = sysmgr.AddNewPLaylist(NewPlayListName.Text, TextBoxUserName.Text);
+                        //        ExistingPlayListDDL.DataBind();
+                        //        ExistingPlayListDDL.SelectedValue = id.ToString();
+                        //        MyPlayList.DataSource = null;
+                        //        MyPlayList.DataBind();
+                        //    }, "", "SUCCESS: New PlayList Added");
+                        //}
                         break;
                     case ("Save"):
                         var playListItems = GetPlayListItemsFromGridView();
-                        MessageUserControl.TryRun(() => {
-                            PlayListController sysmgr = new PlayListController();
-                            sysmgr.SavePlayList(ExistingPlayListDDL.SelectedValue.ToInt(), playListItems);
-                        }, "", "SUCCESS: PlayList Saved");
+                        if (ButtonSavePlayList.Text == "Save (New Playlist)")
+                        {
+                            if (string.IsNullOrEmpty(NewPlayListName.Text))
+                                MessageUserControl.ShowInfo("", "ERROR: Give a new PlayList name.");
+                            else
+                            {
+                                MessageUserControl.TryRun(() =>
+                                {
+                                    PlayListController sysmgr = new PlayListController();
+                                    int id = sysmgr.AddNewPLaylist(NewPlayListName.Text, TextBoxUserName.Text);
+                                    ExistingPlayListDDL.DataBind();
+                                    ExistingPlayListDDL.SelectedValue = id.ToString();
+                                    sysmgr.SavePlayList(ExistingPlayListDDL.SelectedValue.ToInt(), playListItems);
+                                }, "", "SUCCESS: PlayList Saved");
+                            }
+                        }
                         break;
                 }
             }
