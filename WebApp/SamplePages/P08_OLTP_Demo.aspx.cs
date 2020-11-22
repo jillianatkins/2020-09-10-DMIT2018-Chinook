@@ -24,6 +24,15 @@ namespace WebApp.SamplePages
             AlbumTitle.Attributes.Add("onkeydown", "return (event.keyCode!=13);");
             TextBoxUserName.Attributes.Add("onkeydown", "return (event.keyCode!=13);");
             NewPlayListName.Attributes.Add("onkeydown", "return (event.keyCode!=13);");
+            //TODO: #7 Check if a user is logged in
+            if (Request.IsAuthenticated)
+            {
+                MessageUserControl.ShowInfo("Login Successful");
+            }
+            else
+            {
+                Response.Redirect("~/Account/Login.aspx");
+            }
         }
 
         #region UserNameCheck
@@ -83,10 +92,21 @@ namespace WebApp.SamplePages
             if (e.CommandName == "AddToMyPlayList")
             {
                 UserPlayListTrack item = GetTrackFromTracksListToAddToPlayList(e.Item);
-                var playListItems = GetPlayListItemsFromGridView();
-                playListItems.Insert(0, item);
-                MyPlayList.DataSource = playListItems;
-                MyPlayList.DataBind();
+                List<UserPlayListTrack> playListItems = GetPlayListItemsFromGridView();
+                bool trackAlreadyInPlaylist = false;
+                foreach (UserPlayListTrack i in playListItems)
+                {
+                    if (item.TrackID == i.TrackID)
+                        trackAlreadyInPlaylist = true;
+                }
+                if (trackAlreadyInPlaylist)
+                    MessageUserControl.ShowInfo("", "ERROR: Cannot have duplicate tracks in playlist");
+                else
+                {
+                    playListItems.Insert(0, item);
+                    MyPlayList.DataSource = playListItems;
+                    MyPlayList.DataBind();
+                }
                 e.Handled = true;
             }
         }
@@ -106,24 +126,34 @@ namespace WebApp.SamplePages
         List<UserPlayListTrack> GetPlayListItemsFromGridView()
         {
             var list = new List<UserPlayListTrack>();
-            int trackNumber = 2;
             foreach (GridViewRow row in MyPlayList.Rows)
             {
                 var item = new UserPlayListTrack
                 {
                     TrackID = row.FindLabel("TrackId").Text.ToInt(),
-                    TrackNumber = trackNumber,
+                    TrackNumber = row.FindLabel("TrackNumber").Text.ToInt(),
                     TrackName = row.FindLabel("TrackName").Text,
                     Milliseconds = row.FindLabel("Milliseconds").Text.ToInt(),
                     UnitPrice = row.FindLabel("UnitPrice").Text.ToDecimal()
                 };
                 list.Add(item);
-                trackNumber++;
             }
             return list;
         }
         #endregion
 
+        #region PlaylistDropDown
+        protected void PlaylistDropDown_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            MessageUserControl.TryRun(() => {
+                PlayListController sysmgr = new PlayListController();
+                List<UserPlayListTrack> info = sysmgr.ListExistingPlayList
+                    (ExistingPlayListDDL.SelectedValue);
+                MyPlayList.DataSource = info;
+                MyPlayList.DataBind();
+            }, "", "SUCCESS: PlayList Retrieved");
+        }
+        #endregion
         #region PlayList Item Command
         protected void PlayList_Buttons_Command(Object sender, System.Web.UI.WebControls.CommandEventArgs e)
         {

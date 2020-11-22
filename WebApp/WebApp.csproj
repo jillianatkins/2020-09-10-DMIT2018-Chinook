@@ -335,6 +335,7 @@
     <Content Include="Scripts\popper.js.map" />
     <Content Include="Scripts\popper-utils.min.js.map" />
     <Content Include="Scripts\popper-utils.js.map" />
+    <Content Include="WebAppSettings.config" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Account\AddPhoneNumber.aspx.cs">
@@ -542,6 +543,7 @@
     <Compile Include="SamplePages\P08_OLTP_Demo.aspx.designer.cs">
       <DependentUpon>P08_OLTP_Demo.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Security\SecurityDbContextInitializer.cs" />
     <Compile Include="Site.Master.cs">
       <DependentUpon>Site.Master</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

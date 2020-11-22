@@ -10,69 +10,77 @@
     </div>
     <div class="row">
         <div class="col-sm-2">
-            <asp:Label ID="Label1" runat="server" Text="Artist"></asp:Label>&nbsp;&nbsp;
+            <asp:Label ID="Label1" runat="server" Text="Artist"></asp:Label>
             <asp:TextBox ID="ArtistName" runat="server" placeholder="artist name"
-                Width="100" AutoPostBack="False">
+                Width="110"  AutoPostBack="False">
             </asp:TextBox>
-            <asp:Button ID="ArtistFetch" runat="server" Text="Fetch"
-                OnCommand="Tracks_Button_Command" CommandName="Artist" /><br />
+            <asp:Button ID="ArtistFetch" runat="server" Text="Get"
+                OnCommand="Tracks_Button_Command" CommandName="Artist" 
+                CssClass="btn btn-success btn-xs" /><br />
             <br />
 
             <asp:Label ID="Label2" runat="server" Text="Media"></asp:Label>
-            <asp:DropDownList ID="MediaTypeDDL" runat="server" Width="100"
+            <asp:DropDownList ID="MediaTypeDDL" runat="server" 
+                Width="110" 
                 DataSourceID="MediaTypeDDLODS"
                 DataTextField="DisplayText"
                 DataValueField="IDValueField">
             </asp:DropDownList>
-            <asp:Button ID="MediaTypeFetch" runat="server" Text="Fetch"
-                OnCommand="Tracks_Button_Command" CommandName="MediaType" /><br />
+            <asp:Button ID="MediaTypeFetch" runat="server" Text="Get"
+                OnCommand="Tracks_Button_Command" CommandName="MediaType" 
+                CssClass="btn btn-success btn-xs" /><br />
             <br />
 
             <asp:Label ID="Label3" runat="server" Text="Genre"></asp:Label>
-            <asp:DropDownList ID="GenreDDL" runat="server" Width="100"
+            <asp:DropDownList ID="GenreDDL" runat="server" 
+                Width="110" 
                 DataSourceID="GenreDDLODS"
                 DataTextField="DisplayText"
                 DataValueField="IDValueField">
             </asp:DropDownList>
-            <asp:Button ID="GenreFetch" runat="server" Text="Fetch"
-                OnCommand="Tracks_Button_Command" CommandName="Genre" /><br />
+            <asp:Button ID="GenreFetch" runat="server" Text="Get"
+                OnCommand="Tracks_Button_Command" CommandName="Genre" 
+                CssClass="btn btn-success btn-xs" /><br />
             <br />
 
             <asp:Label ID="Label4" runat="server" Text="Album"></asp:Label>
             <asp:TextBox ID="AlbumTitle" runat="server" placeholder="album title"
-                Width="100" AutoPostBack="False"></asp:TextBox>
-            <asp:Button ID="AlbumFetch" runat="server" Text="Fetch"
-                OnCommand="Tracks_Button_Command" CommandName="Album" /><br />
+                Width="110" AutoPostBack="False"></asp:TextBox>
+            <asp:Button ID="AlbumFetch" runat="server" Text="Get"
+                OnCommand="Tracks_Button_Command" CommandName="Album" 
+                CssClass="btn btn-success btn-xs" /><br />
             <br />
-            <fieldset>
-                <legend>User Playlists
-                </legend>
+            
                 <asp:Label ID="Label7" runat="server" Text="User Name"></asp:Label>
                 <asp:TextBox ID="TextBoxUserName" runat="server" Width="100"
-                    Text="RobbinLaw" AutoPostBack="True" OnTextChanged="CheckForValidUserName"></asp:TextBox>
-                <br />
-                <br />
-
-                <asp:Label ID="Label5" runat="server" Text="Existing Playlist"></asp:Label>
-                <asp:DropDownList ID="ExistingPlayListDDL" runat="server" Width="100"
+                    Text="RobbinLaw" AutoPostBack="True" OnTextChanged="CheckForValidUserName">
+                </asp:TextBox>
+                <br /><br />
+                <asp:Label ID="Label5" runat="server" Text="Existing Playlist Name"></asp:Label>
+                <asp:DropDownList ID="ExistingPlayListDDL" runat="server" 
+                    Width="200" 
                     DataSourceID="ExistingPlayListDDLODS"
                     DataTextField="DisplayText"
-                    DataValueField="IDValueField">
-                </asp:DropDownList>
-                <asp:Button ID="ExistingPlayListButton" runat="server" Text="Fetch"
-                    OnCommand="PlayList_Buttons_Command" CommandName="Existing" /><br />
-                <br />
-
-                <asp:Label ID="Label6" runat="server" Text="New Playlist"></asp:Label>
-                <asp:TextBox ID="NewPlayListName" runat="server" Width="100"
-                    AutoPostBack="False"></asp:TextBox>
-                <asp:Button ID="NewPlayListButton" runat="server" Text="New"
-                    OnCommand="PlayList_Buttons_Command" CommandName="New" /><br />
+                    DataValueField="IDValueField"
+                    AppendDataBoundItems="true" 
+                    AutoPostBack="true" 
+                    OnSelectedIndexChanged="PlaylistDropDown_SelectedIndexChanged" >
+                    <asp:ListItem Value="0">[Select Playlist]</asp:ListItem>
+                </asp:DropDownList><br /><br />
+                <asp:Button ID="ExistingPlayListButton" runat="server" Text="New Playlist"
+                    OnCommand="PlayList_Buttons_Command" CommandName="New" 
+                    CssClass="btn btn-success btn-xs" /><br />
+                <asp:Label ID="Label6" runat="server" Text="New Playlist Name"></asp:Label>
+                <asp:TextBox ID="NewPlayListName" runat="server" Width="120"
+                    AutoPostBack="False"></asp:TextBox><br />
+                <%--<asp:Button ID="NewPlayListButton" runat="server" Text="New"
+                    OnCommand="PlayList_Buttons_Command" CommandName="New" /><br />--%>
                 <br />
                 <asp:Button ID="ButtonSavePlayList" runat="server" Text="Save PlayList"
-                    OnCommand="PlayList_Buttons_Command" CommandName="Save" /><br />
+                    OnCommand="PlayList_Buttons_Command" CommandName="Save" 
+                    CssClass="btn btn-success btn-xs" /><br />
                 <br />
-            </fieldset>
+            
 
 
 
@@ -296,6 +304,7 @@
                 Name="userName" Type="String"></asp:ControlParameter>
         </SelectParameters>
     </asp:ObjectDataSource>
+
     <asp:ObjectDataSource ID="TracksSelectionListODS" runat="server"
         OldValuesParameterFormatString="original_{0}"
         SelectMethod="List_TracksForPlaylistSelection"

@@ -102,6 +102,8 @@ namespace ChinookSystem.BLL
 						Name = playlistname,
 						UserName = username
 					};
+					//A new primary key will be put into exits.PlaylistId
+					//after the new Playlist is added to the Playists collection.
 					context.Playlists.Add(exists);
 					context.SaveChanges();
 					return exists.PlaylistId;
@@ -112,23 +114,32 @@ namespace ChinookSystem.BLL
 				}
 			}
 		}
-		public void SavePlayList(int playlistid, List<UserPlayListTrack> playlist)
+		public void SavePlayList(int argplaylistid, List<UserPlayListTrack> argplaylist)
 		{
+			PlaylistTrack argPlaylistTrack = null;
 			using (var context = new ChinookSystemContext())
 			{
-				throw new Exception("MESSAGE: SavePlayList with playlistid=" + playlistid 
-					+ " and first trackid=" + playlist[0].TrackID
-					);
-
-				//foreach (var track in playList)
-				//{
-				//	PlaylistTrack results2 = (from x in context.PlaylistTracks
-				//							  where x.PlaylistId == playlistid
-				//							  && x.TrackId == track.TrackID
-				//							  orderby x.TrackNumber
-				//							  select x).FirstOrDefault();
-				//}
-					
+				//Delete from PlaylistTracks table all items related to playlistid
+				//presently in the db.
+				var playlistOld = (from x in context.PlaylistTracks
+								   where x.PlaylistId == argplaylistid
+								   select x).ToList();
+				foreach (PlaylistTrack item in playlistOld)
+				{
+					context.PlaylistTracks.Remove(item);
+				}
+				//Add to PlaylistTracks table the items from playlist collection
+				//argument and relate them to playlistid.
+				foreach (UserPlayListTrack item in argplaylist)
+                {
+					//Instantiate a new entity type.
+					argPlaylistTrack = new PlaylistTrack();
+					argPlaylistTrack.PlaylistId = argplaylistid;
+					argPlaylistTrack.TrackId = item.TrackID;
+					argPlaylistTrack.TrackNumber = item.TrackNumber;
+					context.PlaylistTracks.Add(argPlaylistTrack);
+                }
+				context.SaveChanges();
 			}
 		}
 		#endregion
