@@ -119,7 +119,7 @@ namespace ChinookSystem.BLL
 			PlaylistTrack argPlaylistTrack = null;
 			using (var context = new ChinookSystemContext())
 			{
-				//Delete from PlaylistTracks table all items related to playlistid
+				//Delete from PlaylistTracks table all items related to argplaylistid
 				//presently in the db.
 				var playlistOld = (from x in context.PlaylistTracks
 								   where x.PlaylistId == argplaylistid
@@ -128,7 +128,7 @@ namespace ChinookSystem.BLL
 				{
 					context.PlaylistTracks.Remove(item);
 				}
-				//Add to PlaylistTracks table the items from playlist collection
+				//Add to PlaylistTracks table the items from argplaylist collection
 				//argument and relate them to playlistid.
 				foreach (UserPlayListTrack item in argplaylist)
                 {

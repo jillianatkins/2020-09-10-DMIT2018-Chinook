@@ -165,6 +165,7 @@ namespace WebApp.SamplePages
 
         }
         #endregion
+
         #region PlayList Item Command New and Save buttons
         protected void PlayList_Buttons_Command(Object sender, System.Web.UI.WebControls.CommandEventArgs e)
         {
@@ -182,19 +183,6 @@ namespace WebApp.SamplePages
                         MyPlayList.DataSource = null;
                         MyPlayList.DataBind();
                         NewPlayListName.Visible = true;
-                        //if (string.IsNullOrEmpty(NewPlayListName.Text))
-                        //    MessageUserControl.ShowInfo("", "ERROR: Give a new PlayList name.");
-                        //else
-                        //{
-                        //    MessageUserControl.TryRun(() => {
-                        //        PlayListController sysmgr = new PlayListController();
-                        //        int id = sysmgr.AddNewPLaylist(NewPlayListName.Text, TextBoxUserName.Text);
-                        //        ExistingPlayListDDL.DataBind();
-                        //        ExistingPlayListDDL.SelectedValue = id.ToString();
-                        //        MyPlayList.DataSource = null;
-                        //        MyPlayList.DataBind();
-                        //    }, "", "SUCCESS: New PlayList Added");
-                        //}
                         break;
                     case ("Save"):
                         var playListItems = GetPlayListItemsFromGridView();
@@ -211,8 +199,16 @@ namespace WebApp.SamplePages
                                     ExistingPlayListDDL.DataBind();
                                     ExistingPlayListDDL.SelectedValue = id.ToString();
                                     sysmgr.SavePlayList(ExistingPlayListDDL.SelectedValue.ToInt(), playListItems);
-                                }, "", "SUCCESS: PlayList Saved");
+                                }, "", "SUCCESS: New PlayList Saved");
                             }
+                        }
+                        else
+                        {
+                            MessageUserControl.TryRun(() =>
+                            {
+                                PlayListController sysmgr = new PlayListController();
+                                sysmgr.SavePlayList(ExistingPlayListDDL.SelectedValue.ToInt(), playListItems);
+                            }, "", "SUCCESS: Old PlayList Saved");
                         }
                         break;
                 }
