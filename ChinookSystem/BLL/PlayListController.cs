@@ -121,7 +121,7 @@ namespace ChinookSystem.BLL
 			{
 				//Delete from PlaylistTracks table all items related to argplaylistid
 				//presently in the db.
-				var playlistOld = (from x in context.PlaylistTracks
+				List<PlaylistTrack> playlistOld = (from x in context.PlaylistTracks
 								   where x.PlaylistId == argplaylistid
 								   select x).ToList();
 				foreach (PlaylistTrack item in playlistOld)

@@ -185,7 +185,7 @@ namespace WebApp.SamplePages
                         NewPlayListName.Visible = true;
                         break;
                     case ("Save"):
-                        var playListItems = GetPlayListItemsFromGridView();
+                        List<UserPlayListTrack> playListItems = GetPlayListItemsFromGridView();
                         if (ButtonSavePlayList.Text == "Save (New Playlist)")
                         {
                             if (string.IsNullOrEmpty(NewPlayListName.Text))
@@ -221,7 +221,7 @@ namespace WebApp.SamplePages
         {
             int rowIndex = Convert.ToInt32(e.CommandArgument);
             List<UserPlayListTrack> playListItems = GetPlayListItemsFromGridView();
-            var playListItem = playListItems[rowIndex];
+            UserPlayListTrack playListItem = playListItems[rowIndex];
             if (e.CommandName == "DeleteFromMyPlayList")
             {
                 MessageUserControl.ShowInfo("", "MESSAGE: DeleteFromMyPlayList, index: " +
