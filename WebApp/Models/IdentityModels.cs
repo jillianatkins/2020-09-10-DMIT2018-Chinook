@@ -9,7 +9,7 @@ using Microsoft.Owin.Security;
 using WebApp.Models;
 
 #region Additional Namespaces
-using System.Data.Entity; // Needed for the .SetInitialzer() method to be available
+using System.Data.Entity; // TODO #4: Needed for the .SetInitialzer() method to be available
 using WebApp.Security;
 #endregion
 
