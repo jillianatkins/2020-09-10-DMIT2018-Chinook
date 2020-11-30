@@ -43,7 +43,7 @@ namespace WebApp.Models
             : base("DefaultConnection", throwIfV1Schema: false)
         {
             #region TODO #4 Modify ApplicaitonDbContext
-            //Tell my constructor to use the SecurityDbInitializer 
+            //Tell my constructor to use the SecurityDbContextInitializer 
             //to "seed" or set up the database.
             Database.SetInitializer(new SecurityDbContextInitializer());
             #endregion

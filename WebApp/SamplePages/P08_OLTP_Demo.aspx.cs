@@ -25,14 +25,14 @@ namespace WebApp.SamplePages
             TextBoxUserName.Attributes.Add("onkeydown", "return (event.keyCode!=13);");
             NewPlayListName.Attributes.Add("onkeydown", "return (event.keyCode!=13);");
             //TODO: #7 Check if a user is logged in
-            //if (Request.IsAuthenticated)
-            //{
-            //    MessageUserControl.ShowInfo("Login Successful");
-            //}
-            //else
-            //{
-            //    Response.Redirect("~/Account/Login.aspx");
-            //}
+            if (Request.IsAuthenticated)
+            {
+                MessageUserControl.ShowInfo("Login Successful");
+            }
+            else
+            {
+                Response.Redirect("~/Account/Login.aspx");
+            }
         }
 
         #region UserNameCheck
