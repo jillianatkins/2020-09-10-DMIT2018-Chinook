@@ -24,6 +24,7 @@ namespace WebApp.SamplePages
             AlbumTitle.Attributes.Add("onkeydown", "return (event.keyCode!=13);");
             TextBoxUserName.Attributes.Add("onkeydown", "return (event.keyCode!=13);");
             NewPlayListName.Attributes.Add("onkeydown", "return (event.keyCode!=13);");
+            //TODO: #6 is in the Login.aspx page of the Accounts folder.
             //TODO: #7 Check if a user is logged in
             if (Request.IsAuthenticated)
             {
