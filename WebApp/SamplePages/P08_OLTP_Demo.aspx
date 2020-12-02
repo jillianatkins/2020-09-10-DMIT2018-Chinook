@@ -6,6 +6,7 @@
     <div class="row offset-1">
         <h5>Manage Playlists (UI/UX TRX Sample)</h5>
         &nbsp;&nbsp;&nbsp;&nbsp;
+        <asp:Label ID="Message" runat="server" />
         <uc1:MessageUserControl runat="server" ID="MessageUserControl" />
     </div>
     <div class="row">
@@ -43,7 +44,8 @@
             
             <asp:Label ID="Label7" runat="server" Text="User Name"></asp:Label>
             <asp:TextBox ID="TextBoxUserName" runat="server" Width="100"
-                Text="RobbinLaw" AutoPostBack="True" OnTextChanged="CheckForValidUserName" /><br /><br />
+                Text="RobbinLaw" AutoPostBack="True" OnTextChanged="CheckForValidUserName" Readonly="true"/>
+            <br /><br />
             <asp:Label ID="Label5" runat="server" Text="Existing Playlist Name" />
             <asp:DropDownList ID="ExistingPlayListDDL" runat="server" 
                 Width="200" CssClass="form-control"
