@@ -26,13 +26,13 @@ namespace WebApp.SamplePages
             NewPlayListName.Attributes.Add("onkeydown", "return (event.keyCode!=13);");
             //TODO: #6 is in the Login.aspx page of the Accounts folder.
             //TODO: #7 Check if a user is logged in and is a Customer.
-            //Then set the TextBoxuserName to the logged in User.
+            //Then set the TextBoxUserName to the logged in User.
             //If the user is not a Customer then bounce back to the login page.
             //TODO: #8 Change the TextBoxUserName in the aspx to be readonly
             //so that it cannot be changed.
             if (Request.IsAuthenticated && User.IsInRole("Customers"))
             {
-                Message.Text = "Login Successful as a Customer";
+                Message.Text = "Login Successful as a Customer or Administrator";
                 TextBoxUserName.Text = User.Identity.Name;
             }
             else
