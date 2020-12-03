@@ -24,15 +24,21 @@ namespace WebApp.SamplePages
             AlbumTitle.Attributes.Add("onkeydown", "return (event.keyCode!=13);");
             TextBoxUserName.Attributes.Add("onkeydown", "return (event.keyCode!=13);");
             NewPlayListName.Attributes.Add("onkeydown", "return (event.keyCode!=13);");
-            //TODO: #7 Check if a user is logged in
-            //if (Request.IsAuthenticated)
-            //{
-            //    MessageUserControl.ShowInfo("Login Successful");
-            //}
-            //else
-            //{
-            //    Response.Redirect("~/Account/Login.aspx");
-            //}
+            //TODO: #6 is in the Login.aspx page of the Accounts folder.
+            //TODO: #7 Check if a user is logged in and is a Customer.
+            //Then set the TextBoxUserName to the logged in User.
+            //If the user is not a Customer then bounce back to the login page.
+            //TODO: #8 Change the TextBoxUserName in the aspx to be readonly
+            //so that it cannot be changed.
+            if (Request.IsAuthenticated && User.IsInRole("Customers"))
+            {
+                Message.Text = "Login Successful as a Customer";
+                TextBoxUserName.Text = User.Identity.Name;
+            }
+            else
+            {
+                Response.Redirect("~/Account/Login.aspx");
+            }
         }
 
         #region UserNameCheck

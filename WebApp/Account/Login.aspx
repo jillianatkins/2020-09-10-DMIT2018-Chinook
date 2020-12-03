@@ -17,11 +17,12 @@
                         </p>
                     </asp:PlaceHolder>
                     <div class="form-group">
-                        <!-- TODO #6 Change login page to display userName instead of email -->
+                        <!-- TODO #6 Change login page to display userName instead of email 
+                            and get rid of TextMode="email" -->
                         <asp:Label runat="server" AssociatedControlID="Email" CssClass="col-md-2 control-label">UserName</asp:Label>
                         <div class="col-md-10">
                             <asp:TextBox runat="server" ID="Email" CssClass="form-control" />
-                            <asp:RequiredFieldValidator runat="server" ControlToValidate="Email"
+                            <asp:RequiredFieldValidator runat="server" ControlToValidate="Email" 
                                 CssClass="text-danger" ErrorMessage="The UserName field is required." />
                         </div>
                     </div>
