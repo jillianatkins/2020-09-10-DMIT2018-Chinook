@@ -32,7 +32,7 @@ namespace WebApp.SamplePages
             //so that it cannot be changed.
             if (Request.IsAuthenticated && User.IsInRole("Customers"))
             {
-                Message.Text = "Login Successful as a Customer or Administrator";
+                Message.Text = "Login Successful as a Customer";
                 TextBoxUserName.Text = User.Identity.Name;
             }
             else
